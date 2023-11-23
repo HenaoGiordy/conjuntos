@@ -14,7 +14,7 @@ public class ConjuntoArray {
 
     //Conjunto definiendo solo su tamaño sin elementos
     public ConjuntoArray(int tamano) {
-        this.elementos = new int[tamano];
+        this.elementos = new int[tamano + 1];
     }
 
     public ConjuntoArray() {
@@ -26,7 +26,7 @@ public class ConjuntoArray {
     }
 
     public void setLength(int x) {
-        this.elementos = new int[x];
+        this.elementos = new int[x + 1];
     }
 
     public int getSize() {
@@ -49,7 +49,10 @@ public class ConjuntoArray {
         this.elementos = elementos;
     }
 
-    public void add(int x) {
+    public void add(int x) throws Exception {
+        if(x > this.elementos.length - 1 ){
+            throw new Exception("Número muy grande");
+        }
         this.elementos[x] = 1;
     }
 

@@ -333,6 +333,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_crearConjuntoActionPerformed
 
     private void agregarElementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarElementoActionPerformed
+        try{
         if(tipoConjunto.getSelectedItem().equals("Array") && nombreConjunto.getSelectedItem().equals("ConjuntoA") ){
             conjuntoA.add(Integer.parseInt(elemento.getText()));
             mostrarConjunto.setText("ConjuntoA: " + conjuntoA.toString());
@@ -340,6 +341,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         if(tipoConjunto.getSelectedItem().equals("Array") && nombreConjunto.getSelectedItem().equals("ConjuntoB") ){
             conjuntoB.add(Integer.parseInt(elemento.getText()));
             mostrarConjunto.setText("ConjuntoB: " + conjuntoB.toString());
+        }
+        }catch(Exception exc){
+            JOptionPane.showMessageDialog(null, exc.getMessage());
+        
         }
         
     }//GEN-LAST:event_agregarElementoActionPerformed

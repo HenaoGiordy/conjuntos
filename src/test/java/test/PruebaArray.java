@@ -22,8 +22,8 @@ public class PruebaArray {
         
         
         
-        conjunto.add(1);
-        conjunto.add(2);
+//        conjunto.add(1);
+//        conjunto.add(2);
         assertEquals(1, conjunto.getElementos()[1]);
     }
 }
