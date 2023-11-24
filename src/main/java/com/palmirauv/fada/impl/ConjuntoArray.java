@@ -95,16 +95,29 @@ public class ConjuntoArray {
 
             if (lengthConjuntoA > lengthConjuntoB) {
 
-                resultado.setLength(lengthConjuntoA);
+                resultado.setLength(lengthConjuntoA - 1);
 
-                for (int i = 0; i < lengthConjuntoB; i++) {
+                for (int i = 0; i < lengthConjuntoB ; i++) {
                     if ((this.elementos[i] == 1) || (conjuntoB.getElementos()[i] == 1)) {
                         resultado.getElementos()[i] = 1;
                     }
                 }
-            } else {
-                for (int i = 0; i < lengthConjuntoA; i++) {
+                for (int i = lengthConjuntoB - 1; i < lengthConjuntoA ; i++) {
+                    if ((this.elementos[i] == 1)) {
+                        resultado.getElementos()[i] = 1;
+                    }
+                }
+            } if(lengthConjuntoA < lengthConjuntoB) {
+                
+                resultado.setLength(lengthConjuntoB - 1);
+
+                for (int i = 0; i < lengthConjuntoA ; i++) {
                     if ((this.elementos[i] == 1) || (conjuntoB.getElementos()[i] == 1)) {
+                        resultado.getElementos()[i] = 1;
+                    }
+                }
+                for (int i = lengthConjuntoA - 1; i < lengthConjuntoB ; i++) {
+                    if ((conjuntoB.getElementos()[i] == 1)) {
                         resultado.getElementos()[i] = 1;
                     }
                 }
@@ -136,19 +149,24 @@ public class ConjuntoArray {
 
             if (lengthConjuntoA > lengthConjuntoB) {
 
-                resultado.setLength(lengthConjuntoB);
+                resultado.setLength(lengthConjuntoA - 1);
 
-                for (int i = 0; i < lengthConjuntoB; i++) {
+                for (int i = 0; i < lengthConjuntoB ; i++) {
                     if ((this.elementos[i] == 1) && (conjuntoB.getElementos()[i] == 1)) {
                         resultado.getElementos()[i] = 1;
                     }
                 }
-            } else {
-                for (int i = 0; i < lengthConjuntoA; i++) {
+                
+            } if(lengthConjuntoA < lengthConjuntoB) {
+                
+                resultado.setLength(lengthConjuntoB - 1);
+
+                for (int i = 0; i < lengthConjuntoA ; i++) {
                     if ((this.elementos[i] == 1) && (conjuntoB.getElementos()[i] == 1)) {
                         resultado.getElementos()[i] = 1;
                     }
                 }
+                
 
             }
             return resultado;
@@ -187,8 +205,24 @@ public class ConjuntoArray {
 
     public ConjuntoArray diferencia(ConjuntoArray conjuntoB) {
 
-        ConjuntoArray resultado = new ConjuntoArray(this.elementos.length);
-
+        ConjuntoArray resultado = new ConjuntoArray();
+        
+        int lengthconjuntoA = this.elementos.length;
+        int lengthconjuntoB = conjuntoB.getElementos().length;
+        
+        resultado.setLength(lengthconjuntoA - 1);
+  
+            if(lengthconjuntoA > lengthconjuntoB){
+                
+                
+                for(int i = 0; i < conjuntoB.getElementos().length ; i++){
+                    if ((this.elementos[i] == 1 && conjuntoB.getElementos()[i] == 0)) {
+    
+                resultado.getElementos()[i] = 1;
+            }
+                }
+                return resultado;
+            }
         for (int i = 0; i < this.elementos.length; i++) {
 
             if ((this.elementos[i] == 1 && conjuntoB.getElementos()[i] == 0)) {
