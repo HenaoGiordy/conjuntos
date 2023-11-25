@@ -11,13 +11,31 @@ package com.palmirauv.fada.impl;
 public class ConjuntoBinario {
 
     private byte[] elementos;
+    private int maxbit;
 
     public ConjuntoBinario(int tamano) {
         this.elementos = new byte[(int) Math.floor((double) tamano / 8) + 1];
+        this.maxbit = tamano % 8;
+    }
+
+    public ConjuntoBinario() {
+
     }
 
     public byte[] getElementos() {
         return elementos;
+    }
+
+    public int getMaxbit() {
+        return maxbit;
+    }
+
+    public void setElementos(byte[] elementos) {
+        this.elementos = elementos;
+    }
+
+    public void setMaxbit(int maxbit) {
+        this.maxbit = maxbit;
     }
 
     public void setLength(int x) {
@@ -26,25 +44,31 @@ public class ConjuntoBinario {
 
     public int getSize() {
         int size = 0;
-        for (int i = 0; i < elementos.length; i++) {
-            if ((elementos[i] & 1) == 1) {
-                size++;
-            }
+        for (byte elemento : elementos) {
+            size += Integer.bitCount(elemento & 0xFF);
         }
         return size;
     }
 
-    public void add(int x) {
+    public void add(int x) throws Exception {
+
         int indiceByte = (int) Math.floor((double) x / 8);
         int bit = x % 8;
-        elementos[indiceByte] |= (1 << bit);
+        if (bit > maxbit && indiceByte == elementos.length - 1) {
+            throw new Exception("Numero muy grande");
+        } else {
+            elementos[indiceByte] |= (1 << bit);
+        }
     }
 
-    public void remove(int x) {
+    public void remove(int x) throws Exception {
         int indiceByte = (int) Math.floor((double) x / 8);
         int bit = x % 8;
-        elementos[indiceByte] &= ~(1 << bit);
-
+        if (x >= 0 && bit <= this.maxbit) {
+            elementos[indiceByte] &= ~(1 << bit);
+        } else {
+            throw new Exception("Numero muy grande remove");
+        }
     }
 
     public int getValue(int x) {
@@ -60,22 +84,28 @@ public class ConjuntoBinario {
             return "{ }";
         }
         for (int i = 0; i < elementos.length * 8; i++) {
-            if (getValue(i + 1) == 1) {
-                valor.append(i).append(" ,");
+            if (getValue(i) == 1) {
+                valor.append(i).append(" , ");
             }
         }
-        return "{ " + valor.substring(0, valor.length() - 1) + " }";
+
+        return "{ " + valor.substring(0, valor.length() - 2) + " }";
     }
 
     // Método para la unión de dos conjuntos
     public ConjuntoBinario union(ConjuntoBinario conjuntoB) {
         int lengthConjuntoA = this.elementos.length;
         int lengthConjuntoB = conjuntoB.getElementos().length;
+        int maxBitA = this.maxbit;
+        int maxBitB = conjuntoB.getMaxbit();
+
         int lengthResultado = Math.max(lengthConjuntoA, lengthConjuntoB);
+        int maxBitResultado = Math.max(maxBitA, maxBitB);
 
-        ConjuntoBinario resultado = new ConjuntoBinario(lengthResultado);
+        ConjuntoBinario resultado = new ConjuntoBinario(lengthResultado * 8);
+        resultado.setMaxbit(maxBitResultado);
 
-        for (int i = 0; i < lengthResultado; i++) {
+        for (int i = 0; i < resultado.getElementos().length; i++) {
             byte byteA;
             if (i < lengthConjuntoA) {
                 byteA = this.elementos[i];
@@ -100,11 +130,16 @@ public class ConjuntoBinario {
     public ConjuntoBinario interseccion(ConjuntoBinario conjuntoB) {
         int lengthConjuntoA = this.elementos.length;
         int lengthConjuntoB = conjuntoB.getElementos().length;
-        int lengthResultado = Math.min(lengthConjuntoA, lengthConjuntoB);
+        int maxBitA = this.maxbit;
+        int maxBitB = conjuntoB.getMaxbit();
 
-        ConjuntoBinario resultado = new ConjuntoBinario(lengthResultado);
+        int lengthResultado = Math.max(lengthConjuntoA, lengthConjuntoB);
+        int maxBitResultado = Math.max(maxBitA, maxBitB);
 
-        for (int i = 0; i < lengthResultado; i++) {
+        ConjuntoBinario resultado = new ConjuntoBinario(lengthResultado * 8);
+        resultado.setMaxbit(maxBitResultado);
+
+        for (int i = 0; i < resultado.getElementos().length; i++) {
             byte byteA;
             if (i < lengthConjuntoA) {
                 byteA = this.elementos[i];
@@ -129,11 +164,16 @@ public class ConjuntoBinario {
     public ConjuntoBinario diferencia(ConjuntoBinario conjuntoB) {
         int lengthConjuntoA = this.elementos.length;
         int lengthConjuntoB = conjuntoB.getElementos().length;
+        int maxBitA = this.maxbit;
+        int maxBitB = conjuntoB.getMaxbit();
+
         int lengthResultado = Math.max(lengthConjuntoA, lengthConjuntoB);
+        int maxBitResultado = Math.max(maxBitA, maxBitB);
 
-        ConjuntoBinario resultado = new ConjuntoBinario(lengthResultado);
+        ConjuntoBinario resultado = new ConjuntoBinario(lengthResultado * 8);
+        resultado.setMaxbit(maxBitResultado);
 
-        for (int i = 0; i < lengthResultado; i++) {
+        for (int i = 0; i < resultado.getElementos().length; i++) {
             byte byteA;
             if (i < lengthConjuntoA) {
                 byteA = this.elementos[i];
@@ -156,24 +196,26 @@ public class ConjuntoBinario {
 
     // Método para el complemento de un conjunto en relación con el conjunto universal
     public ConjuntoBinario complemento(ConjuntoBinario conjuntoUniversal) {
+
         int lengthConjunto = this.elementos.length;
         int lengthUniversal = conjuntoUniversal.getElementos().length;
-        int lengthResultado = Math.max(lengthConjunto, lengthUniversal);
+        int maxBitA = conjuntoUniversal.getMaxbit();
 
-        ConjuntoBinario resultado = new ConjuntoBinario(lengthResultado);
+        ConjuntoBinario resultado = new ConjuntoBinario(lengthUniversal * 8);
+        resultado.setMaxbit(maxBitA);
 
-        for (int i = 0; i < lengthResultado; i++) {
+        for (int i = 0; i < resultado.getElementos().length; i++) {
             byte byteConjunto;
             byte byteUniversal;
-            
+
             if (i < lengthConjunto) {
                 byteConjunto = this.elementos[i];
             } else {
                 byteConjunto = 0;
             }
-            
+
             byteUniversal = conjuntoUniversal.getElementos()[i];
- 
+
             resultado.getElementos()[i] = (byte) (~byteConjunto & byteUniversal);
         }
 
