@@ -6,7 +6,7 @@ package com.palmirauv.fada.impl;
 
 /**
  *
- * @author jberm
+ * @author Jaider Bermudez
  */
 public class ConjuntoBinario {
 

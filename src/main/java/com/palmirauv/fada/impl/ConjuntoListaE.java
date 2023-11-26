@@ -8,7 +8,7 @@ import java.util.LinkedList;
 
 /**
  *
- * @author giord
+ * @author Laura Zamora
  */
 public class ConjuntoListaE {
 
