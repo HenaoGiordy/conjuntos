@@ -21,13 +21,13 @@ public class ConjuntoListaE {
     public LinkedList<Integer> getElementos() {
         return elementos;
     }
-    
-    public int getSize(){
+
+    public int getSize() {
         return this.elementos.size();
     }
 
     public void add(int x) {
-        if(! this.elementos.contains(x)){
+        if (!this.elementos.contains(x)) {
             this.elementos.add(x);
         }
     }
@@ -35,8 +35,8 @@ public class ConjuntoListaE {
     public void remove(int x) {
         this.elementos.remove(Integer.valueOf(x));
     }
-    
-    public boolean contains(int x){
+
+    public boolean contains(int x) {
         return this.elementos.contains(x);
     }
 
@@ -47,18 +47,21 @@ public class ConjuntoListaE {
     public void setElementos(LinkedList<Integer> elementos) {
         this.elementos = elementos;
     }
-    
+
     @Override
     public String toString() {
-
-        String str = "";
-
-        for (Integer elemento : this.elementos) {
-
-            str += elemento + " ,";
+        if (this.elementos.isEmpty()) {
+            return "{ }";
         }
 
-        return "{ " + str.substring(0, str.length() - 1) + " }";
+        StringBuilder str = new StringBuilder();
+        for (Integer elemento : this.elementos) {
+            str.append(elemento).append(", ");
+        }
+
+        str.setLength(str.length() - 2);
+
+        return "{ " + str.toString() + " }";
     }
 
     public ConjuntoListaE union(ConjuntoListaE conjuntoB) {
@@ -71,10 +74,11 @@ public class ConjuntoListaE {
 
     public ConjuntoListaE interseccion(ConjuntoListaE conjuntoB) {
         ConjuntoListaE resultado = new ConjuntoListaE();
-        
-        for (int elemento : this.elementos){
-            if (conjuntoB.contains(elemento))
+
+        for (int elemento : this.elementos) {
+            if (conjuntoB.contains(elemento)) {
                 resultado.add(elemento);
+            }
         }
 
         return resultado;
@@ -82,8 +86,8 @@ public class ConjuntoListaE {
 
     public ConjuntoListaE diferencia(ConjuntoListaE conjuntoB) {
         ConjuntoListaE resultado = new ConjuntoListaE();
-        for (int elemento : this.elementos){
-            if (! conjuntoB.contains(elemento)){
+        for (int elemento : this.elementos) {
+            if (!conjuntoB.contains(elemento)) {
                 resultado.add(elemento);
             }
         }
@@ -92,13 +96,13 @@ public class ConjuntoListaE {
 
     public ConjuntoListaE complemento(ConjuntoListaE universal) {
         ConjuntoListaE resultado = new ConjuntoListaE();
-        
-        for(int elemento : universal.getElementos()){
-            if(! this.contains(elemento)){
+
+        for (int elemento : universal.getElementos()) {
+            if (!this.contains(elemento)) {
                 resultado.add(elemento);
-                    }
             }
+        }
         return resultado;
     }
-    
+
 }

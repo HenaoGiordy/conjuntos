@@ -28,7 +28,7 @@ public class PruebaListaE {
 
         ConjuntoListaE conjuntoC = conjuntoA.union(conjuntoB);
 
-        assertTrue(conjuntoC.toString().equals("{1, 3, 5, 2, 4, 6}"));
+        assertTrue(conjuntoC.toString().equals("{ 1, 3, 5, 2, 4, 6 }"));
     }
 
     @Test
@@ -46,7 +46,7 @@ public class PruebaListaE {
 
         ConjuntoListaE conjuntoC = conjuntoA.interseccion(conjuntoB);
 
-        assertTrue(conjuntoC.toString().equals("{3}"));
+        assertTrue(conjuntoC.toString().equals("{ 3 }"));
     }
 
     @Test
@@ -64,6 +64,6 @@ public class PruebaListaE {
 
         ConjuntoListaE conjuntoC = conjuntoA.diferencia(conjuntoB);
 
-        assertTrue(conjuntoC.toString().equals("{1, 5}"));
+        assertTrue(conjuntoC.toString().equals("{ 1, 5 }"));
     }
 }
