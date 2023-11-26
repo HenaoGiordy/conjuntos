@@ -5,6 +5,7 @@
 package com.palmirauv.fada ;
 
 import com.palmirauv.fada.impl.ConjuntoArray;
+import com.palmirauv.fada.impl.ConjuntoBinario;
 import com.palmirauv.fada.impl.ConjuntoListaE;
 import javax.swing.JOptionPane;
 
@@ -25,7 +26,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     ConjuntoListaE universalL = new ConjuntoListaE(); 
     
     //Conjuntos como arreglos de bytes
-    
+    ConjuntoBinario conjuntoABy = new ConjuntoBinario();
+    ConjuntoBinario conjuntoBBy = new ConjuntoBinario();
+    ConjuntoBinario universalBy = new ConjuntoBinario();
     
     /**
      * Creates new form VentanaPrincipal
@@ -165,12 +168,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel3.setText("=");
 
+        conjuntoAcombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "ConjuntoA", "ConjuntoB" }));
         conjuntoAcombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 conjuntoAcomboActionPerformed(evt);
             }
         });
 
+        conjuntoBcombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "ConjuntoA", "ConjuntoB" }));
         conjuntoBcombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 conjuntoBcomboActionPerformed(evt);
@@ -309,6 +314,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void crearConjuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearConjuntoActionPerformed
+        
+        //ARRAYS
         try{
         if(tipoConjunto.getSelectedItem().equals("Array") && nombreConjunto.getSelectedItem().equals("ConjuntoA") ){
             this.conjuntoA.setLength(Integer.parseInt(numeroElementos.getText()));
@@ -330,10 +337,34 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }catch(NumberFormatException exc){
             JOptionPane.showMessageDialog(null, "Debes Ingresar el tamaño del Conjunto");
         }
+        
+        //BINARIOS
+        try{
+        if(tipoConjunto.getSelectedItem().equals("Bytes") && nombreConjunto.getSelectedItem().equals("ConjuntoA") ){
+            this.conjuntoABy.setLength(Integer.parseInt(numeroElementos.getText()));
+            mostrarConjunto.setText("ConjuntoA: " + conjuntoABy.toString());
+            
+        }
+        if(tipoConjunto.getSelectedItem().equals("Bytes") && nombreConjunto.getSelectedItem().equals("ConjuntoB") ){
+            this.conjuntoBBy.setLength(Integer.parseInt(numeroElementos.getText()));
+            mostrarConjunto.setText("ConjuntoB: " + conjuntoBBy.toString()  );
+            
+        }
+        if(tipoConjunto.getSelectedItem().equals("Bytes") && nombreConjunto.getSelectedItem().equals("Universal") ){
+            this.universalBy.setLength(Integer.parseInt(numeroElementos.getText()));
+            for(int i = 0; i < this.universal.getElementos().length; i++){
+                this.universal.getElementos()[i] = 1;
+            }
+            mostrarConjunto.setText("Universal: " + universalBy.toString());
+        }
+        }catch(NumberFormatException exc){
+            JOptionPane.showMessageDialog(null, "Debes Ingresar el tamaño del Conjunto");
+        }
     }//GEN-LAST:event_crearConjuntoActionPerformed
 
     private void agregarElementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarElementoActionPerformed
         try{
+            //Agregar Elemento Array
         if(tipoConjunto.getSelectedItem().equals("Array") && nombreConjunto.getSelectedItem().equals("ConjuntoA") ){
             conjuntoA.add(Integer.parseInt(elemento.getText()));
             mostrarConjunto.setText("ConjuntoA: " + conjuntoA.toString());
@@ -342,10 +373,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             conjuntoB.add(Integer.parseInt(elemento.getText()));
             mostrarConjunto.setText("ConjuntoB: " + conjuntoB.toString());
         }
+        
+        //Agregar Elemento Bytes
+        if(tipoConjunto.getSelectedItem().equals("Bytes") && nombreConjunto.getSelectedItem().equals("ConjuntoA") ){
+            conjuntoABy.add(Integer.parseInt(elemento.getText()));
+            mostrarConjunto.setText("ConjuntoA: " + conjuntoABy.toString());
+        }
+        if(tipoConjunto.getSelectedItem().equals("Bytes") && nombreConjunto.getSelectedItem().equals("ConjuntoB") ){
+            conjuntoBBy.add(Integer.parseInt(elemento.getText()));
+            mostrarConjunto.setText("ConjuntoB: " + conjuntoBBy.toString());
+        }
+        
         }catch(Exception exc){
             JOptionPane.showMessageDialog(null, exc.getMessage());
         
         }
+       
         
     }//GEN-LAST:event_agregarElementoActionPerformed
 
@@ -381,12 +424,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             conjuntoLA = new ConjuntoListaE();
             conjuntoLB = new ConjuntoListaE();
             universalL = new ConjuntoListaE();
+
         }
         
         if(tipoConjunto.getSelectedItem().equals("Bytes")){
-
             
-            
+            conjuntoABy = new ConjuntoBinario();
+            conjuntoBBy = new ConjuntoBinario();
+            universalBy = new ConjuntoBinario();
+           
         }
         
         if(tipoConjunto.getSelectedItem().equals("Array")){
@@ -394,13 +440,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             conjuntoA = new ConjuntoArray();
             conjuntoB = new ConjuntoArray();
             universal = new ConjuntoArray();
-            conjuntoAcombo.addItem("-");
-            conjuntoAcombo.addItem("conjuntoA");
-            conjuntoAcombo.addItem("conjuntoB");
             
-            conjuntoBcombo.addItem("-");
-            conjuntoBcombo.addItem("conjuntoA");
-            conjuntoBcombo.addItem("conjuntoB");
+            
+            
+
         }
     }//GEN-LAST:event_tipoConjuntoActionPerformed
 

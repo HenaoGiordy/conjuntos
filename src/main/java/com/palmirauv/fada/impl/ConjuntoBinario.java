@@ -37,9 +37,14 @@ public class ConjuntoBinario {
     public void setMaxbit(int maxbit) {
         this.maxbit = maxbit;
     }
+    
+    public int getLengt(){
+        return this.elementos.length;
+    }
 
     public void setLength(int x) {
         this.elementos = new byte[(int) Math.floor((double) x / 8) + 1];
+        this.maxbit = x % 8;
     }
 
     public int getSize() {
