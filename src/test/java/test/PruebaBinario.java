@@ -107,6 +107,16 @@ public class PruebaBinario {
             conjuntoA.add(1);
             conjuntoA.add(3);
             conjuntoA.add(5);
+            
+            conjuntoUniversal.add(0);
+            conjuntoUniversal.add(1);
+            conjuntoUniversal.add(2);
+            conjuntoUniversal.add(3);
+            conjuntoUniversal.add(4);
+            conjuntoUniversal.add(5);
+            conjuntoUniversal.add(6);
+            conjuntoUniversal.add(7);
+            conjuntoUniversal.add(8);
 
         } catch (Exception exc) {
             fail("Error durante la prueba: " + exc.getMessage());
@@ -114,11 +124,14 @@ public class PruebaBinario {
 
         ConjuntoBinario conjuntoC = conjuntoA.complemento(conjuntoUniversal);
 
+        assertTrue(conjuntoC.getValue(0) == 1);
         assertTrue(conjuntoC.getValue(1) == 0);
         assertTrue(conjuntoC.getValue(2) == 1);
         assertTrue(conjuntoC.getValue(3) == 0);
         assertTrue(conjuntoC.getValue(4) == 1);
         assertTrue(conjuntoC.getValue(5) == 0);
         assertTrue(conjuntoC.getValue(6) == 1);
+        assertTrue(conjuntoC.getValue(7) == 1);
+        assertTrue(conjuntoC.getValue(8) == 1);
     }
 }

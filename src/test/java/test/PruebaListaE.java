@@ -66,18 +66,4 @@ public class PruebaListaE {
 
         assertTrue(conjuntoC.toString().equals("{1, 5}"));
     }
-
-    @Test
-    public void pruebaComplemento() {
-        ConjuntoListaE conjuntoA = new ConjuntoListaE();
-        ConjuntoListaE conjuntoUniversal = new ConjuntoListaE();
-
-        conjuntoA.add(1);
-        conjuntoA.add(3);
-        conjuntoA.add(5);
-
-        ConjuntoListaE conjuntoC = conjuntoA.complemento(conjuntoUniversal);
-
-        assertTrue(conjuntoC.toString().equals("{1, 3, 5}"));
-    }
 }

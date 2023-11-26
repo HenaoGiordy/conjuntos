@@ -196,25 +196,19 @@ public class ConjuntoBinario {
 
     // Método para el complemento de un conjunto en relación con el conjunto universal
     public ConjuntoBinario complemento(ConjuntoBinario conjuntoUniversal) {
-
+        
         int lengthConjunto = this.elementos.length;
         int lengthUniversal = conjuntoUniversal.getElementos().length;
         int maxBitA = conjuntoUniversal.getMaxbit();
 
-        ConjuntoBinario resultado = new ConjuntoBinario(lengthUniversal * 8);
+        int lengthResultado = Math.min(lengthConjunto, lengthUniversal);
+
+        ConjuntoBinario resultado = new ConjuntoBinario(lengthResultado * 8);
         resultado.setMaxbit(maxBitA);
 
-        for (int i = 0; i < resultado.getElementos().length; i++) {
-            byte byteConjunto;
-            byte byteUniversal;
-
-            if (i < lengthConjunto) {
-                byteConjunto = this.elementos[i];
-            } else {
-                byteConjunto = 0;
-            }
-
-            byteUniversal = conjuntoUniversal.getElementos()[i];
+        for (int i = 0; i < lengthResultado; i++) {
+            byte byteConjunto = (i < lengthConjunto) ? this.elementos[i] : 0;
+            byte byteUniversal = conjuntoUniversal.getElementos()[i];
 
             resultado.getElementos()[i] = (byte) (~byteConjunto & byteUniversal);
         }
