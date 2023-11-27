@@ -352,8 +352,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
             if (tipoConjunto.getSelectedItem().equals("Bytes") && nombreConjunto.getSelectedItem().equals("Universal")) {
                 this.universalBy.setLength(Integer.parseInt(numeroElementos.getText()));
-                for (int i = 0; i < this.universalBy.getMaxbit(); i++) {
-                    this.universalBy.getElementos()[i] = 1;
+                for(int i = 0; i < universalBy.getElementos().length; i++){
+                    if(i == universalBy.getElementos().length - 1){
+                        for(int j = 0; j <= universalBy.getMaxbit(); j++){
+                            universalBy.getElementos()[i] |= (1<<j);
+                        }
+                    }
                 }
                 mostrarConjunto.setText("Universal: " + universalBy.toString());
             }
