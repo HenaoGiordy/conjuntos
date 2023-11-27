@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.palmirauv.fada ;
+package com.palmirauv.fada;
 
 import com.palmirauv.fada.impl.ConjuntoArray;
 import com.palmirauv.fada.impl.ConjuntoBinario;
@@ -14,22 +14,22 @@ import javax.swing.JOptionPane;
  * @author giord
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
-    
+
     //Conjuntos como Arreglos
     ConjuntoArray conjuntoA = new ConjuntoArray();
     ConjuntoArray conjuntoB = new ConjuntoArray();
-    ConjuntoArray universal = new ConjuntoArray(); 
-    
+    ConjuntoArray universal = new ConjuntoArray();
+
     //Conjuntos como Listas Enlazadas
     ConjuntoListaE conjuntoLA = new ConjuntoListaE();
     ConjuntoListaE conjuntoLB = new ConjuntoListaE();
-    ConjuntoListaE universalL = new ConjuntoListaE(); 
-    
+    ConjuntoListaE universalL = new ConjuntoListaE();
+
     //Conjuntos como arreglos de bytes
     ConjuntoBinario conjuntoABy = new ConjuntoBinario();
     ConjuntoBinario conjuntoBBy = new ConjuntoBinario();
     ConjuntoBinario universalBy = new ConjuntoBinario();
-    
+
     /**
      * Creates new form VentanaPrincipal
      */
@@ -314,135 +314,175 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void crearConjuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearConjuntoActionPerformed
-        
+
         //ARRAYS
-        try{
-        if(tipoConjunto.getSelectedItem().equals("Array") && nombreConjunto.getSelectedItem().equals("ConjuntoA") ){
-            this.conjuntoA.setLength(Integer.parseInt(numeroElementos.getText()));
-            mostrarConjunto.setText("ConjuntoA: " + conjuntoA.toString());
-            
-        }
-        if(tipoConjunto.getSelectedItem().equals("Array") && nombreConjunto.getSelectedItem().equals("ConjuntoB") ){
-            this.conjuntoB.setLength(Integer.parseInt(numeroElementos.getText()));
-            mostrarConjunto.setText("ConjuntoB: " + conjuntoB.toString()  );
-            
-        }
-        if(tipoConjunto.getSelectedItem().equals("Array") && nombreConjunto.getSelectedItem().equals("Universal") ){
-            this.universal.setLength(Integer.parseInt(numeroElementos.getText()));
-            for(int i = 0; i < this.universal.getElementos().length; i++){
-                this.universal.getElementos()[i] = 1;
+        try {
+            if (tipoConjunto.getSelectedItem().equals("Array") && nombreConjunto.getSelectedItem().equals("ConjuntoA")) {
+                this.conjuntoA.setLength(Integer.parseInt(numeroElementos.getText()));
+                mostrarConjunto.setText("ConjuntoA: " + conjuntoA.toString());
+
             }
-            mostrarConjunto.setText("Universal: " + universal.toString());
-        }
-        }catch(NumberFormatException exc){
+            if (tipoConjunto.getSelectedItem().equals("Array") && nombreConjunto.getSelectedItem().equals("ConjuntoB")) {
+                this.conjuntoB.setLength(Integer.parseInt(numeroElementos.getText()));
+                mostrarConjunto.setText("ConjuntoB: " + conjuntoB.toString());
+
+            }
+            if (tipoConjunto.getSelectedItem().equals("Array") && nombreConjunto.getSelectedItem().equals("Universal")) {
+                this.universal.setLength(Integer.parseInt(numeroElementos.getText()));
+                for (int i = 0; i < this.universal.getElementos().length; i++) {
+                    this.universal.getElementos()[i] = 1;
+                }
+                mostrarConjunto.setText("Universal: " + universal.toString());
+            }
+        } catch (NumberFormatException exc) {
             JOptionPane.showMessageDialog(null, "Debes Ingresar el tamaño del Conjunto");
         }
-        
+
         //BINARIOS
-        try{
-        if(tipoConjunto.getSelectedItem().equals("Bytes") && nombreConjunto.getSelectedItem().equals("ConjuntoA") ){
-            this.conjuntoABy.setLength(Integer.parseInt(numeroElementos.getText()));
-            mostrarConjunto.setText("ConjuntoA: " + conjuntoABy.toString());
-            
-        }
-        if(tipoConjunto.getSelectedItem().equals("Bytes") && nombreConjunto.getSelectedItem().equals("ConjuntoB") ){
-            this.conjuntoBBy.setLength(Integer.parseInt(numeroElementos.getText()));
-            mostrarConjunto.setText("ConjuntoB: " + conjuntoBBy.toString()  );
-            
-        }
-        if(tipoConjunto.getSelectedItem().equals("Bytes") && nombreConjunto.getSelectedItem().equals("Universal") ){
-            this.universalBy.setLength(Integer.parseInt(numeroElementos.getText()));
-            for(int i = 0; i < this.universal.getElementos().length; i++){
-                this.universal.getElementos()[i] = 1;
+        try {
+            if (tipoConjunto.getSelectedItem().equals("Bytes") && nombreConjunto.getSelectedItem().equals("ConjuntoA")) {
+                this.conjuntoABy.setLength(Integer.parseInt(numeroElementos.getText()));
+                mostrarConjunto.setText("ConjuntoA: " + conjuntoABy.toString());
+
             }
-            mostrarConjunto.setText("Universal: " + universalBy.toString());
+            if (tipoConjunto.getSelectedItem().equals("Bytes") && nombreConjunto.getSelectedItem().equals("ConjuntoB")) {
+                this.conjuntoBBy.setLength(Integer.parseInt(numeroElementos.getText()));
+                mostrarConjunto.setText("ConjuntoB: " + conjuntoBBy.toString());
+
+            }
+            if (tipoConjunto.getSelectedItem().equals("Bytes") && nombreConjunto.getSelectedItem().equals("Universal")) {
+                this.universalBy.setLength(Integer.parseInt(numeroElementos.getText()));
+                for (int i = 0; i < this.universalBy.getMaxbit(); i++) {
+                    this.universalBy.getElementos()[i] = 1;
+                }
+                mostrarConjunto.setText("Universal: " + universalBy.toString());
+            }
+        } catch (NumberFormatException exc) {
+            JOptionPane.showMessageDialog(null, "Debes Ingresar el tamaño del Conjunto");
         }
-        }catch(NumberFormatException exc){
+
+        //LINKEDLIST
+        try {
+            if (tipoConjunto.getSelectedItem().equals("LinkedList") && nombreConjunto.getSelectedItem().equals("ConjuntoA")) {
+
+                mostrarConjunto.setText("ConjuntoA: " + conjuntoLA.toString());
+
+            }
+            if (tipoConjunto.getSelectedItem().equals("LinkedList") && nombreConjunto.getSelectedItem().equals("ConjuntoB")) {
+
+                mostrarConjunto.setText("ConjuntoB: " + conjuntoLB.toString());
+
+            }
+            if (tipoConjunto.getSelectedItem().equals("LinkedList") && nombreConjunto.getSelectedItem().equals("Universal")) {
+
+                mostrarConjunto.setText("Universal: " + universalL.toString());
+            }
+        } catch (NumberFormatException exc) {
             JOptionPane.showMessageDialog(null, "Debes Ingresar el tamaño del Conjunto");
         }
     }//GEN-LAST:event_crearConjuntoActionPerformed
 
     private void agregarElementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarElementoActionPerformed
-        try{
+        try {
             //Agregar Elemento Array
-        if(tipoConjunto.getSelectedItem().equals("Array") && nombreConjunto.getSelectedItem().equals("ConjuntoA") ){
-            conjuntoA.add(Integer.parseInt(elemento.getText()));
-            mostrarConjunto.setText("ConjuntoA: " + conjuntoA.toString());
-        }
-        if(tipoConjunto.getSelectedItem().equals("Array") && nombreConjunto.getSelectedItem().equals("ConjuntoB") ){
-            conjuntoB.add(Integer.parseInt(elemento.getText()));
-            mostrarConjunto.setText("ConjuntoB: " + conjuntoB.toString());
-        }
-        
-        //Agregar Elemento Bytes
-        if(tipoConjunto.getSelectedItem().equals("Bytes") && nombreConjunto.getSelectedItem().equals("ConjuntoA") ){
-            conjuntoABy.add(Integer.parseInt(elemento.getText()));
-            mostrarConjunto.setText("ConjuntoA: " + conjuntoABy.toString());
-        }
-        if(tipoConjunto.getSelectedItem().equals("Bytes") && nombreConjunto.getSelectedItem().equals("ConjuntoB") ){
-            conjuntoBBy.add(Integer.parseInt(elemento.getText()));
-            mostrarConjunto.setText("ConjuntoB: " + conjuntoBBy.toString());
-        }
-        
-        }catch(Exception exc){
+            if (tipoConjunto.getSelectedItem().equals("Array") && nombreConjunto.getSelectedItem().equals("ConjuntoA")) {
+                conjuntoA.add(Integer.parseInt(elemento.getText()));
+                mostrarConjunto.setText("ConjuntoA: " + conjuntoA.toString());
+            }
+            if (tipoConjunto.getSelectedItem().equals("Array") && nombreConjunto.getSelectedItem().equals("ConjuntoB")) {
+                conjuntoB.add(Integer.parseInt(elemento.getText()));
+                mostrarConjunto.setText("ConjuntoB: " + conjuntoB.toString());
+            }
+
+            //Agregar Elemento Bytes
+            if (tipoConjunto.getSelectedItem().equals("Bytes") && nombreConjunto.getSelectedItem().equals("ConjuntoA")) {
+                conjuntoABy.add(Integer.parseInt(elemento.getText()));
+                mostrarConjunto.setText("ConjuntoA: " + conjuntoABy.toString());
+            }
+            if (tipoConjunto.getSelectedItem().equals("Bytes") && nombreConjunto.getSelectedItem().equals("ConjuntoB")) {
+                conjuntoBBy.add(Integer.parseInt(elemento.getText()));
+                mostrarConjunto.setText("ConjuntoB: " + conjuntoBBy.toString());
+            }
+
+            //Agregar Elementos LinkedList
+            if (tipoConjunto.getSelectedItem().equals("LinkedList") && nombreConjunto.getSelectedItem().equals("ConjuntoA")) {
+                conjuntoLA.add(Integer.parseInt(elemento.getText()));
+                mostrarConjunto.setText("ConjuntoA: " + conjuntoLA.toString());
+            }
+            if (tipoConjunto.getSelectedItem().equals("LinkedList") && nombreConjunto.getSelectedItem().equals("ConjuntoB")) {
+                conjuntoLB.add(Integer.parseInt(elemento.getText()));
+                mostrarConjunto.setText("ConjuntoB: " + conjuntoLB.toString());
+            }
+            if (tipoConjunto.getSelectedItem().equals("LinkedList") && nombreConjunto.getSelectedItem().equals("Universal")) {
+                universalL.add(Integer.parseInt(elemento.getText()));
+                mostrarConjunto.setText("Universal: " + universalL.toString());
+            }
+
+        } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, exc.getMessage());
-        
+
         }
-       
-        
+
+
     }//GEN-LAST:event_agregarElementoActionPerformed
 
     private void nombreConjuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreConjuntoActionPerformed
         elemento.setEnabled(true);
-        
-        
-        if(nombreConjunto.getSelectedItem().equals("Universal")){
+
+        if (nombreConjunto.getSelectedItem().equals("Universal") && !(tipoConjunto.getSelectedItem().equals("LinkedList"))) {
             elemento.setEnabled(false);
-          
+
         }
-        
-        
+//        if(tipoConjunto.getSelectedItem().equals("LinkedList")){
+//            elemento.setEnabled(true);
+//        }
+
+
     }//GEN-LAST:event_nombreConjuntoActionPerformed
 
     private void mostrarConjuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarConjuntoActionPerformed
-        
-        
+
+
     }//GEN-LAST:event_mostrarConjuntoActionPerformed
 
     private void numeroElementosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numeroElementosActionPerformed
-        
+
     }//GEN-LAST:event_numeroElementosActionPerformed
 
     private void tipoConjuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoConjuntoActionPerformed
-        
+
         numeroElementos.setEnabled(true);
-        
-        
-        
-        if(tipoConjunto.getSelectedItem().equals("LinkedList")){
+
+        if (tipoConjunto.getSelectedItem().equals("LinkedList")) {
+            elemento.setEnabled(true);
+        }
+
+        if (nombreConjunto.getSelectedItem().equals("Universal") && !(tipoConjunto.getSelectedItem().equals("LinkedList"))) {
+            elemento.setEnabled(false);
+
+        }
+
+        if (tipoConjunto.getSelectedItem().equals("LinkedList")) {
             numeroElementos.setEnabled(false);
             conjuntoLA = new ConjuntoListaE();
             conjuntoLB = new ConjuntoListaE();
             universalL = new ConjuntoListaE();
 
         }
-        
-        if(tipoConjunto.getSelectedItem().equals("Bytes")){
-            
+
+        if (tipoConjunto.getSelectedItem().equals("Bytes")) {
+
             conjuntoABy = new ConjuntoBinario();
             conjuntoBBy = new ConjuntoBinario();
             universalBy = new ConjuntoBinario();
-           
+
         }
-        
-        if(tipoConjunto.getSelectedItem().equals("Array")){
+
+        if (tipoConjunto.getSelectedItem().equals("Array")) {
 
             conjuntoA = new ConjuntoArray();
             conjuntoB = new ConjuntoArray();
             universal = new ConjuntoArray();
-            
-            
-            
 
         }
     }//GEN-LAST:event_tipoConjuntoActionPerformed
@@ -460,118 +500,268 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_segundoConjuntoActionPerformed
 
     private void botonMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMostrarActionPerformed
-        if(nombreConjunto.getSelectedItem().equals("ConjuntoA")){
+        if (nombreConjunto.getSelectedItem().equals("ConjuntoA")) {
             mostrarConjunto.setText("ConjuntoA: " + conjuntoA.toString());
         }
-        if(nombreConjunto.getSelectedItem().equals("ConjuntoB")){
+        if (nombreConjunto.getSelectedItem().equals("ConjuntoB")) {
             mostrarConjunto.setText("ConjuntoB: " + conjuntoB.toString());
         }
-        if(nombreConjunto.getSelectedItem().equals("Universal")){
+        if (nombreConjunto.getSelectedItem().equals("Universal")) {
             mostrarConjunto.setText("Universal: " + universal.toString());
         }
     }//GEN-LAST:event_botonMostrarActionPerformed
 
     private void numeroElementosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numeroElementosKeyTyped
         int key = evt.getKeyChar();
-        
-        boolean numero = (key >= 48 && key<= 57);
-        
-        if(!numero){
+
+        boolean numero = (key >= 48 && key <= 57);
+
+        if (!numero) {
             evt.consume();
         }
     }//GEN-LAST:event_numeroElementosKeyTyped
 
     private void elementoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_elementoKeyTyped
         int key = evt.getKeyChar();
-        
-        boolean numero = (key >= 48 && key<= 57);
-        
-        if(!numero){
+
+        boolean numero = (key >= 48 && key <= 57);
+
+        if (!numero) {
             evt.consume();
         }
     }//GEN-LAST:event_elementoKeyTyped
 
     private void conjuntoAcomboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conjuntoAcomboActionPerformed
-        if(conjuntoAcombo.getSelectedItem().equals("conjuntoA") && conjuntoA.getSize() > 0){
-            primerConjunto.setText("ConjuntoA: " + conjuntoA.toString());
+
+        //MOSTRAR ARRAYS
+        if (tipoConjunto.getSelectedItem().equals("Array")) {
+
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA") && conjuntoA.getSize() > 0 && tipoConjunto.getSelectedItem().equals("Array")) {
+                primerConjunto.setText("ConjuntoA: " + conjuntoA.toString());
+            }
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoB") && conjuntoB.getSize() > 0 && tipoConjunto.getSelectedItem().equals("Array")) {
+                primerConjunto.setText("ConjuntoB: " + conjuntoB.toString());
+            }
         }
-        if(conjuntoAcombo.getSelectedItem().equals("conjuntoB") && conjuntoB.getSize() > 0){
-            primerConjunto.setText("ConjuntoB: " + conjuntoB.toString());
+        //MOSTRAR BINARIOS
+        if (tipoConjunto.getSelectedItem().equals("Bytes")) {
+
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA") && conjuntoABy.getSize() > 0 && tipoConjunto.getSelectedItem().equals("Bytes")) {
+                primerConjunto.setText("ConjuntoA: " + conjuntoABy.toString());
+            }
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoB") && conjuntoBBy.getSize() > 0 && tipoConjunto.getSelectedItem().equals("Bytes")) {
+                primerConjunto.setText("ConjuntoB: " + conjuntoBBy.toString());
+            }
         }
+
+        //MOSTRAR LINKEDLIST
+        if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA") && tipoConjunto.getSelectedItem().equals("LinkedList")) {
+            primerConjunto.setText("ConjuntoA: " + conjuntoLA.toString());
+        }
+        if (conjuntoAcombo.getSelectedItem().equals("ConjuntoB") && tipoConjunto.getSelectedItem().equals("LinkedList")) {
+            primerConjunto.setText("ConjuntoB: " + conjuntoLB.toString());
+
+        }
+
     }//GEN-LAST:event_conjuntoAcomboActionPerformed
 
     private void conjuntoBcomboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conjuntoBcomboActionPerformed
-        if(conjuntoBcombo.getSelectedItem().equals("conjuntoA") && conjuntoA.getSize() > 0){
-            segundoConjunto.setText("ConjuntoA: " + conjuntoA.toString());
+        
+        //MOSTRAR ARRAYS
+        if (tipoConjunto.getSelectedItem().equals("Array")) {
+            
+            if (conjuntoBcombo.getSelectedItem().equals("ConjuntoA") && conjuntoA.getSize() > 0 && tipoConjunto.getSelectedItem().equals("Array")) {
+                segundoConjunto.setText("ConjuntoA: " + conjuntoA.toString());
+            }
+            if (conjuntoBcombo.getSelectedItem().equals("ConjuntoB") && conjuntoB.getSize() > 0 && tipoConjunto.getSelectedItem().equals("Array")) {
+                segundoConjunto.setText("ConjuntoB: " + conjuntoB.toString());
+            }
         }
-        if(conjuntoBcombo.getSelectedItem().equals("conjuntoB") && conjuntoB.getSize() > 0){
-            segundoConjunto.setText("ConjuntoB: " + conjuntoB.toString());
+        
+        //MOSTRAR BINARIOS
+        if (tipoConjunto.getSelectedItem().equals("Bytes")) {
+            
+            if (conjuntoBcombo.getSelectedItem().equals("ConjuntoA") && conjuntoABy.getSize() > 0 && tipoConjunto.getSelectedItem().equals("Bytes")) {
+                segundoConjunto.setText("ConjuntoA: " + conjuntoABy.toString());
+            }
+            if (conjuntoBcombo.getSelectedItem().equals("ConjuntoB") && conjuntoBBy.getSize() > 0 && tipoConjunto.getSelectedItem().equals("Bytes")) {
+                segundoConjunto.setText("ConjuntoB: " + conjuntoBBy.toString());
+            }
         }
+
+        //MOSTRAR LINKEDLIST
+        if (conjuntoBcombo.getSelectedItem().equals("ConjuntoA") && tipoConjunto.getSelectedItem().equals("LinkedList")) {
+            segundoConjunto.setText("ConjuntoA: " + conjuntoLA.toString());
+        }
+        if (conjuntoBcombo.getSelectedItem().equals("ConjuntoB") && tipoConjunto.getSelectedItem().equals("LinkedList")) {
+            segundoConjunto.setText("ConjuntoB: " + conjuntoLB.toString());
+
+        }
+
     }//GEN-LAST:event_conjuntoBcomboActionPerformed
 
     private void realizarOperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realizarOperacionActionPerformed
         //OPERACIONES ARRAY
-        if(tipoConjunto.getSelectedItem().equals("Array")){
+        if (tipoConjunto.getSelectedItem().equals("Array")) {
             ConjuntoArray resultado = new ConjuntoArray();
-            
-            if(conjuntoAcombo.getSelectedItem().equals("conjuntoA") && conjuntoA.getSize() > 0 && operaciones.getSelectedItem().equals("Unión")){
+
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA") && conjuntoA.getSize() > 0 && operaciones.getSelectedItem().equals("Unión")) {
                 resultado = conjuntoA.union(conjuntoB);
-                conjuntoResultado.setText( "ConjuntoResultado: "+resultado.toString());
+                conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
             }
-            if(conjuntoAcombo.getSelectedItem().equals("conjuntoB") && conjuntoA.getSize() > 0 && operaciones.getSelectedItem().equals("Unión")){
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoB") && conjuntoA.getSize() > 0 && operaciones.getSelectedItem().equals("Unión")) {
                 resultado = conjuntoB.union(conjuntoA);
-                conjuntoResultado.setText( "ConjuntoResultado: "+resultado.toString());
+                conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
             }
-            
-            if(conjuntoAcombo.getSelectedItem().equals("conjuntoA") && conjuntoA.getSize() > 0 && operaciones.getSelectedItem().equals("Intersección")){
+
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA") && conjuntoA.getSize() > 0 && operaciones.getSelectedItem().equals("Intersección")) {
                 resultado = conjuntoA.interseccion(conjuntoB);
-                conjuntoResultado.setText( "ConjuntoResultado: "+resultado.toString());
+                conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
             }
-            if(conjuntoAcombo.getSelectedItem().equals("conjuntoB") && conjuntoA.getSize() > 0 && operaciones.getSelectedItem().equals("Intersección")){
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoB") && conjuntoA.getSize() > 0 && operaciones.getSelectedItem().equals("Intersección")) {
                 resultado = conjuntoB.interseccion(conjuntoA);
-                conjuntoResultado.setText( "ConjuntoResultado: "+resultado.toString());
+                conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
             }
-            if(conjuntoAcombo.getSelectedItem().equals("conjuntoA") && conjuntoA.getSize() > 0 && operaciones.getSelectedItem().equals("Diferencia")){
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA") && conjuntoA.getSize() > 0 && operaciones.getSelectedItem().equals("Diferencia")) {
                 resultado = conjuntoA.diferencia(conjuntoB);
-                conjuntoResultado.setText( "ConjuntoResultado: "+resultado.toString());
+                conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
             }
-            if(conjuntoAcombo.getSelectedItem().equals("conjuntoB") && conjuntoA.getSize() > 0 && operaciones.getSelectedItem().equals("Diferencia")){
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoB") && conjuntoA.getSize() > 0 && operaciones.getSelectedItem().equals("Diferencia")) {
                 resultado = conjuntoB.diferencia(conjuntoA);
-                conjuntoResultado.setText( "ConjuntoResultado: "+resultado.toString());
+                conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
             }
-            
-            
-            
-            try{
-            if(conjuntoAcombo.getSelectedItem().equals("conjuntoA") && conjuntoA.getSize() > 0 && operaciones.getSelectedItem().equals("Complemento")){
-                resultado = conjuntoA.complemento(universal);
-                conjuntoResultado.setText( "ConjuntoResultado: "+resultado.toString());
-            }
-            if(conjuntoAcombo.getSelectedItem().equals("conjuntoB") && conjuntoB.getSize() > 0 && operaciones.getSelectedItem().equals("Complemento")){
-                resultado = conjuntoB.complemento(universal);
-                conjuntoResultado.setText( "ConjuntoResultado: "+resultado.toString());
-            }
-            }catch(Exception exc){
+
+            try {
+                if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA") && conjuntoA.getSize() > 0 && operaciones.getSelectedItem().equals("Complemento")) {
+                    resultado = conjuntoA.complemento(universal);
+                    conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
+                }
+                if (conjuntoAcombo.getSelectedItem().equals("ConjuntoB") && conjuntoB.getSize() > 0 && operaciones.getSelectedItem().equals("Complemento")) {
+                    resultado = conjuntoB.complemento(universal);
+                    conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
+                }
+            } catch (Exception exc) {
                 JOptionPane.showMessageDialog(null, "Debes Crear el Conjunto Universal");
             }
         }
         //FIN OPERACIONES ARRAY
+
+        //OPERACIONES BYTES
+        if (tipoConjunto.getSelectedItem().equals("Bytes")) {
+            ConjuntoBinario resultado = new ConjuntoBinario();
+
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA") && conjuntoABy.getSize() > 0 && operaciones.getSelectedItem().equals("Unión")) {
+                resultado = conjuntoABy.union(conjuntoBBy);
+                conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
+            }
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoB") && conjuntoABy.getSize() > 0 && operaciones.getSelectedItem().equals("Unión")) {
+                resultado = conjuntoBBy.union(conjuntoABy);
+                conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
+            }
+
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA") && conjuntoABy.getSize() > 0 && operaciones.getSelectedItem().equals("Intersección")) {
+                resultado = conjuntoABy.interseccion(conjuntoBBy);
+                conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
+            }
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoB") && conjuntoABy.getSize() > 0 && operaciones.getSelectedItem().equals("Intersección")) {
+                resultado = conjuntoBBy.interseccion(conjuntoABy);
+                conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
+            }
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA") && conjuntoABy.getSize() > 0 && operaciones.getSelectedItem().equals("Diferencia")) {
+                resultado = conjuntoABy.diferencia(conjuntoBBy);
+                conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
+            }
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoB") && conjuntoABy.getSize() > 0 && operaciones.getSelectedItem().equals("Diferencia")) {
+                resultado = conjuntoBBy.diferencia(conjuntoABy);
+                conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
+            }
+
+            try {
+                if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA") && conjuntoABy.getSize() > 0 && operaciones.getSelectedItem().equals("Complemento")) {
+                    resultado = conjuntoABy.complemento(universalBy);
+                    conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
+                }
+                if (conjuntoAcombo.getSelectedItem().equals("ConjuntoB") && conjuntoB.getSize() > 0 && operaciones.getSelectedItem().equals("Complemento")) {
+                    resultado = conjuntoBBy.complemento(universalBy);
+                    conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
+                }
+            } catch (Exception exc) {
+                JOptionPane.showMessageDialog(null, "Debes Crear el Conjunto Universal");
+            }
+        }
+        //FIN OPERACIONES BYTES
         
-        
+        //OPERACIONES LINKEDLIST
+        if (tipoConjunto.getSelectedItem().equals("LinkedList")) {
+            ConjuntoListaE resultado = new ConjuntoListaE();
+
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA")  && operaciones.getSelectedItem().equals("Unión")) {
+                resultado = conjuntoLA.union(conjuntoLB);
+                conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
+            }
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoB")  && operaciones.getSelectedItem().equals("Unión")) {
+                resultado = conjuntoLB.union(conjuntoLA);
+                conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
+            }
+
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA")  && operaciones.getSelectedItem().equals("Intersección")) {
+                resultado = conjuntoLA.interseccion(conjuntoLB);
+                conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
+            }
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoB")  && operaciones.getSelectedItem().equals("Intersección")) {
+                resultado = conjuntoLB.interseccion(conjuntoLA);
+                conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
+            }
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA")  && operaciones.getSelectedItem().equals("Diferencia")) {
+                resultado = conjuntoLA.diferencia(conjuntoLB);
+                conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
+            }
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoB")  && operaciones.getSelectedItem().equals("Diferencia")) {
+                resultado = conjuntoLB.diferencia(conjuntoLA);
+                conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
+            }
+
+            try {
+                if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA")  && operaciones.getSelectedItem().equals("Complemento")) {
+                    resultado = conjuntoLA.complemento(universalL);
+                    conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
+                }
+                if (conjuntoAcombo.getSelectedItem().equals("ConjuntoB")  && operaciones.getSelectedItem().equals("Complemento")) {
+                    resultado = conjuntoLB.complemento(universalL);
+                    conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
+                }
+            } catch (Exception exc) {
+                JOptionPane.showMessageDialog(null, "Debes Crear el Conjunto Universal");
+            }
+        }
+        //FIN OPERACIONES LINKEDLIST
+
     }//GEN-LAST:event_realizarOperacionActionPerformed
 
     private void operacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_operacionesActionPerformed
         conjuntoBcombo.setEnabled(true);
-        if(operaciones.getSelectedItem().equals("Complemento")){
+        if (operaciones.getSelectedItem().equals("Complemento")) {
+
             conjuntoBcombo.setEnabled(false);
-            segundoConjunto.setText("Universal" + universal.toString());
+            if (tipoConjunto.getSelectedItem().equals("Array")) {
+
+                segundoConjunto.setText("Universal" + universal.toString());
+            }
+            if (tipoConjunto.getSelectedItem().equals("Bytes")) {
+
+                segundoConjunto.setText("Universal" + universalBy.toString());
+            }
+            if (tipoConjunto.getSelectedItem().equals("LinkedList")) {
+
+                segundoConjunto.setText("Universal" + universalL.toString());
+            }
+
         }
     }//GEN-LAST:event_operacionesActionPerformed
 
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarElemento;
