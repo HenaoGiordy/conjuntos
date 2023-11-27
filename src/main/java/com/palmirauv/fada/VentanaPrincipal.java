@@ -352,10 +352,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
             if (tipoConjunto.getSelectedItem().equals("Bytes") && nombreConjunto.getSelectedItem().equals("Universal")) {
                 this.universalBy.setLength(Integer.parseInt(numeroElementos.getText()));
-                for(int i = 0; i < universalBy.getElementos().length; i++){
-                    if(i == universalBy.getElementos().length - 1){
-                        for(int j = 0; j <= universalBy.getMaxbit(); j++){
-                            universalBy.getElementos()[i] |= (1<<j);
+                for (int i = 0; i < universalBy.getElementos().length; i++) {
+                    if (i == universalBy.getElementos().length - 1) {
+                        for (int j = 0; j <= universalBy.getMaxbit(); j++) {
+                            universalBy.getElementos()[i] |= (1 << j);
                         }
                     }
                 }
@@ -570,10 +570,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_conjuntoAcomboActionPerformed
 
     private void conjuntoBcomboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conjuntoBcomboActionPerformed
-        
+
         //MOSTRAR ARRAYS
         if (tipoConjunto.getSelectedItem().equals("Array")) {
-            
+
             if (conjuntoBcombo.getSelectedItem().equals("ConjuntoA") && conjuntoA.getSize() > 0 && tipoConjunto.getSelectedItem().equals("Array")) {
                 segundoConjunto.setText("ConjuntoA: " + conjuntoA.toString());
             }
@@ -581,10 +581,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 segundoConjunto.setText("ConjuntoB: " + conjuntoB.toString());
             }
         }
-        
+
         //MOSTRAR BINARIOS
         if (tipoConjunto.getSelectedItem().equals("Bytes")) {
-            
+
             if (conjuntoBcombo.getSelectedItem().equals("ConjuntoA") && conjuntoABy.getSize() > 0 && tipoConjunto.getSelectedItem().equals("Bytes")) {
                 segundoConjunto.setText("ConjuntoA: " + conjuntoABy.toString());
             }
@@ -606,7 +606,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void realizarOperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realizarOperacionActionPerformed
         //OPERACIONES ARRAY
-        if (tipoConjunto.getSelectedItem().equals("Array")) {
+        if (tipoConjunto.getSelectedItem().equals("Array") && !(conjuntoAcombo.getSelectedItem().equals("-") || conjuntoBcombo.getSelectedItem().equals("-"))) {
             ConjuntoArray resultado = new ConjuntoArray();
 
             if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA") && conjuntoA.getSize() > 0 && operaciones.getSelectedItem().equals("Unión")) {
@@ -635,6 +635,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
             }
 
+        }
+        if (tipoConjunto.getSelectedItem().equals("Array")) {
+            ConjuntoArray resultado = new ConjuntoArray();
             try {
                 if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA") && conjuntoA.getSize() > 0 && operaciones.getSelectedItem().equals("Complemento")) {
                     resultado = conjuntoA.complemento(universal);
@@ -651,7 +654,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //FIN OPERACIONES ARRAY
 
         //OPERACIONES BYTES
-        if (tipoConjunto.getSelectedItem().equals("Bytes")) {
+        if (tipoConjunto.getSelectedItem().equals("Bytes") && !(conjuntoAcombo.getSelectedItem().equals("-") || conjuntoBcombo.getSelectedItem().equals("-"))) {
             ConjuntoBinario resultado = new ConjuntoBinario();
 
             if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA") && conjuntoABy.getSize() > 0 && operaciones.getSelectedItem().equals("Unión")) {
@@ -680,6 +683,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
             }
 
+        }
+        if (tipoConjunto.getSelectedItem().equals("Bytes")) {
+            ConjuntoBinario resultado = new ConjuntoBinario();
             try {
                 if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA") && conjuntoABy.getSize() > 0 && operaciones.getSelectedItem().equals("Complemento")) {
                     resultado = conjuntoABy.complemento(universalBy);
@@ -694,50 +700,54 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         }
         //FIN OPERACIONES BYTES
-        
+
         //OPERACIONES LINKEDLIST
-        if (tipoConjunto.getSelectedItem().equals("LinkedList")) {
+        if (tipoConjunto.getSelectedItem().equals("LinkedList") && !(conjuntoAcombo.getSelectedItem().equals("-") || conjuntoBcombo.getSelectedItem().equals("-"))) {
             ConjuntoListaE resultado = new ConjuntoListaE();
 
-            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA")  && operaciones.getSelectedItem().equals("Unión")) {
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA") && operaciones.getSelectedItem().equals("Unión")) {
                 resultado = conjuntoLA.union(conjuntoLB);
                 conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
             }
-            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoB")  && operaciones.getSelectedItem().equals("Unión")) {
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoB") && operaciones.getSelectedItem().equals("Unión")) {
                 resultado = conjuntoLB.union(conjuntoLA);
                 conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
             }
 
-            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA")  && operaciones.getSelectedItem().equals("Intersección")) {
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA") && operaciones.getSelectedItem().equals("Intersección")) {
                 resultado = conjuntoLA.interseccion(conjuntoLB);
                 conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
             }
-            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoB")  && operaciones.getSelectedItem().equals("Intersección")) {
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoB") && operaciones.getSelectedItem().equals("Intersección")) {
                 resultado = conjuntoLB.interseccion(conjuntoLA);
                 conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
             }
-            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA")  && operaciones.getSelectedItem().equals("Diferencia")) {
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA") && operaciones.getSelectedItem().equals("Diferencia")) {
                 resultado = conjuntoLA.diferencia(conjuntoLB);
                 conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
             }
-            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoB")  && operaciones.getSelectedItem().equals("Diferencia")) {
+            if (conjuntoAcombo.getSelectedItem().equals("ConjuntoB") && operaciones.getSelectedItem().equals("Diferencia")) {
                 resultado = conjuntoLB.diferencia(conjuntoLA);
                 conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
             }
 
+        }
+        if (tipoConjunto.getSelectedItem().equals("LinkedList")) {
+            ConjuntoListaE resultado = new ConjuntoListaE();
             try {
-                if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA")  && operaciones.getSelectedItem().equals("Complemento")) {
+                if (conjuntoAcombo.getSelectedItem().equals("ConjuntoA") && operaciones.getSelectedItem().equals("Complemento")) {
                     resultado = conjuntoLA.complemento(universalL);
                     conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
                 }
-                if (conjuntoAcombo.getSelectedItem().equals("ConjuntoB")  && operaciones.getSelectedItem().equals("Complemento")) {
+                if (conjuntoAcombo.getSelectedItem().equals("ConjuntoB") && operaciones.getSelectedItem().equals("Complemento")) {
                     resultado = conjuntoLB.complemento(universalL);
                     conjuntoResultado.setText("ConjuntoResultado: " + resultado.toString());
                 }
             } catch (Exception exc) {
-                JOptionPane.showMessageDialog(null, "Debes Crear el Conjunto Universal");
+                JOptionPane.showMessageDialog(null, exc.getMessage());
             }
         }
+
         //FIN OPERACIONES LINKEDLIST
 
     }//GEN-LAST:event_realizarOperacionActionPerformed
