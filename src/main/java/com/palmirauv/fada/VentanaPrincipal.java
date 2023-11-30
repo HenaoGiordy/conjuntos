@@ -527,12 +527,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void elementoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_elementoKeyTyped
         int key = evt.getKeyChar();
-
+        
+        boolean numeroGuion = (key == 45);
         boolean numero = (key >= 48 && key <= 57);
-
+        
+        boolean noContiene = !elemento.getText().contains("-");
+        boolean primeraPos = elemento.getText().length() > 0;
+        
+        if(tipoConjunto.getSelectedItem().equals("LinkedList")){
+//        if (numeroGuion || numero ) {
+//            
+//            if( numero || numeroGuion && noContiene){}else{evt.consume();}
+//            
+//            }else{
+//            evt.consume();
+//        }
+            if (numero){} else{if(numeroGuion && noContiene && !primeraPos){}else{evt.consume();}}
+        }
+        else{
         if (!numero) {
             evt.consume();
         }
+        }
+        
+
     }//GEN-LAST:event_elementoKeyTyped
 
     private void conjuntoAcomboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conjuntoAcomboActionPerformed
