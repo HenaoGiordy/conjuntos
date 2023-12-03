@@ -390,7 +390,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     int maxA = Integer.MIN_VALUE;
                     int maxB = Integer.MIN_VALUE;
                     int minA = Integer.MAX_VALUE;
-                    int minB = Integer.MAX_VALUE;  
+                    int minB = Integer.MAX_VALUE;
 
                     for (int i = 0; i < conjuntoLA.getSize(); i++) {
                         if (conjuntoLA.getElementos().get(i) > maxA) {
@@ -408,7 +408,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             minA = conjuntoLB.getElementos().get(i);
                         }
                     }
-                    
+
                     int numax = Math.max(maxA, maxB);
                     int numin = Math.min(minA, minB);
 
@@ -489,10 +489,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void tipoConjuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoConjuntoActionPerformed
 
         numeroElementos.setEnabled(true);
+        elemento.setEnabled(true);
 
         if (nombreConjunto.getSelectedItem().equals("Universal")) {
             elemento.setEnabled(false);
-
         }
 
         if (tipoConjunto.getSelectedItem().equals("LinkedList")) {
