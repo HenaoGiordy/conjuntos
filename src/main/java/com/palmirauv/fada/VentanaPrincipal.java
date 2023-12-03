@@ -466,7 +466,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void nombreConjuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreConjuntoActionPerformed
         elemento.setEnabled(true);
 
-        if (nombreConjunto.getSelectedItem().equals("Universal") && !(tipoConjunto.getSelectedItem().equals("LinkedList"))) {
+        if (nombreConjunto.getSelectedItem().equals("Universal")) {
             elemento.setEnabled(false);
 
         }
