@@ -136,6 +136,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        elemento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                elementoActionPerformed(evt);
+            }
+        });
         elemento.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 elementoKeyTyped(evt);
@@ -352,11 +357,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
             if (tipoConjunto.getSelectedItem().equals("Bytes") && nombreConjunto.getSelectedItem().equals("Universal")) {
                 this.universalBy.setLength(Integer.parseInt(numeroElementos.getText()));
+
                 for (int i = 0; i < universalBy.getElementos().length; i++) {
                     if (i == universalBy.getElementos().length - 1) {
-                        for (int j = 0; j <= universalBy.getMaxbit(); j++) {
-                            universalBy.getElementos()[i] |= (1 << j);
-                        }
+                        byte mask = (byte) ((1 << universalBy.getMaxbit()));
+                        universalBy.getElementos()[i] |= mask;
+                    } else {
+                        universalBy.getElementos()[i] = (byte) ~universalBy.getElementos()[i];
                     }
                 }
                 mostrarConjunto.setText("Universal: " + universalBy.toString());
@@ -379,7 +386,38 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
             if (tipoConjunto.getSelectedItem().equals("LinkedList") && nombreConjunto.getSelectedItem().equals("Universal")) {
 
-                mostrarConjunto.setText("Universal: " + universalL.toString());
+                if (conjuntoLA.getSize() > 0 || conjuntoLB.getSize() > 0) {
+                    int maxA = Integer.MIN_VALUE;
+                    int maxB = Integer.MIN_VALUE;
+                    int minA = Integer.MAX_VALUE;
+                    int minB = Integer.MAX_VALUE;  
+
+                    for (int i = 0; i < conjuntoLA.getSize(); i++) {
+                        if (conjuntoLA.getElementos().get(i) > maxA) {
+                            maxA = conjuntoLA.getElementos().get(i);
+                        }
+                        if (conjuntoLA.getElementos().get(i) < minA) {
+                            minA = conjuntoLA.getElementos().get(i);
+                        }
+                    }
+                    for (int i = 0; i < conjuntoLB.getSize(); i++) {
+                        if (conjuntoLB.getElementos().get(i) > maxA) {
+                            maxA = conjuntoLB.getElementos().get(i);
+                        }
+                        if (conjuntoLB.getElementos().get(i) < minA) {
+                            minA = conjuntoLB.getElementos().get(i);
+                        }
+                    }
+                    
+                    int numax = Math.max(maxA, maxB);
+                    int numin = Math.min(minA, minB);
+
+                    for (; numin <= numax; numin++) {
+                        universalL.add(numin);
+                    }
+                    System.out.println("el conjunto universal tiene " + universalL.getElementos());
+                    mostrarConjunto.setText("Universal: " + universalL.toString());
+                }
             }
         } catch (NumberFormatException exc) {
             JOptionPane.showMessageDialog(null, "Debes Ingresar el tamaño del Conjunto");
@@ -417,10 +455,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 conjuntoLB.add(Integer.parseInt(elemento.getText()));
                 mostrarConjunto.setText("ConjuntoB: " + conjuntoLB.toString());
             }
-            if (tipoConjunto.getSelectedItem().equals("LinkedList") && nombreConjunto.getSelectedItem().equals("Universal")) {
-                universalL.add(Integer.parseInt(elemento.getText()));
-                mostrarConjunto.setText("Universal: " + universalL.toString());
-            }
 
         } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, exc.getMessage());
@@ -457,11 +491,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         numeroElementos.setEnabled(true);
 
-        if (tipoConjunto.getSelectedItem().equals("LinkedList")) {
-            elemento.setEnabled(true);
-        }
-
-        if (nombreConjunto.getSelectedItem().equals("Universal") && !(tipoConjunto.getSelectedItem().equals("LinkedList"))) {
+        if (nombreConjunto.getSelectedItem().equals("Universal")) {
             elemento.setEnabled(false);
 
         }
@@ -527,29 +557,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void elementoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_elementoKeyTyped
         int key = evt.getKeyChar();
-        
+
         boolean numeroGuion = (key == 45);
         boolean numero = (key >= 48 && key <= 57);
-        
+
         boolean noContiene = !elemento.getText().contains("-");
         boolean primeraPos = elemento.getText().length() > 0;
-        
-        if(tipoConjunto.getSelectedItem().equals("LinkedList")){
-//        if (numeroGuion || numero ) {
-//            
-//            if( numero || numeroGuion && noContiene){}else{evt.consume();}
-//            
-//            }else{
-//            evt.consume();
-//        }
-            if (numero){} else{if(numeroGuion && noContiene && !primeraPos){}else{evt.consume();}}
+
+        if (tipoConjunto.getSelectedItem().equals("LinkedList")) {
+
+            if (numero) {
+            } else {
+                if (numeroGuion && noContiene && !primeraPos) {
+                } else {
+                    evt.consume();
+                }
+            }
+        } else {
+            if (!numero) {
+                evt.consume();
+            }
         }
-        else{
-        if (!numero) {
-            evt.consume();
-        }
-        }
-        
+
 
     }//GEN-LAST:event_elementoKeyTyped
 
@@ -790,6 +819,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_operacionesActionPerformed
+
+    private void elementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_elementoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_elementoActionPerformed
 
     /**
      * @param args the command line arguments
