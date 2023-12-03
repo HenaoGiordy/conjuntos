@@ -415,7 +415,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     for (; numin <= numax; numin++) {
                         universalL.add(numin);
                     }
-                    System.out.println("el conjunto universal tiene " + universalL.getElementos());
                     mostrarConjunto.setText("Universal: " + universalL.toString());
                 }
             }
