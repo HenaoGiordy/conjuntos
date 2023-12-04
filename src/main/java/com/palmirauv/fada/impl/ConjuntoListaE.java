@@ -64,24 +64,15 @@ public class ConjuntoListaE {
         return "{ " + str.toString() + " }";
     }
 
-    //Método para eliminar el elemento repetido en la unión
-    private LinkedList<Integer> eliminarNumero(LinkedList<Integer> lista) {
-        LinkedList<Integer> resultado = new LinkedList<>();
-        for (Integer elemento : lista) {
+    public ConjuntoListaE union(ConjuntoListaE conjuntoB) {
+        ConjuntoListaE resultado = new ConjuntoListaE();
+        resultado.getElementos().addAll(this.elementos);
+
+        for (Integer elemento : conjuntoB.getElementos()) {
             if (!resultado.contains(elemento)) {
                 resultado.add(elemento);
             }
         }
-        return resultado;
-    }
-
-    public ConjuntoListaE union(ConjuntoListaE conjuntoB) {
-        ConjuntoListaE resultado = new ConjuntoListaE();
-        resultado.getElementos().addAll(this.elementos);
-        resultado.getElementos().addAll(conjuntoB.getElementos());
-
-        //Eliminar el numero repetido
-        resultado.elementos = eliminarNumero(resultado.elementos);
 
         return resultado;
     }
