@@ -13,14 +13,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Jaider Bermudez
  */
 public class PruebaBinario {
-    
+
     @Test
-    public void pruebaAnadir(){
-    ConjuntoBinario conjuntoA = new ConjuntoBinario(8);
-    
-        assertEquals(8,conjuntoA.getLengt());
-    
-    
+    public void pruebaAnadir() {
+        ConjuntoBinario conjuntoA = new ConjuntoBinario(8);
+
+        assertEquals(8, ((conjuntoA.getLengt() - 1) * 8) + conjuntoA.getMaxbit());
+
     }
 
     @Test
@@ -48,7 +47,7 @@ public class PruebaBinario {
         assertTrue(conjuntoC.getValue(3) == 1);
         assertTrue(conjuntoC.getValue(4) == 1);
         assertTrue(conjuntoC.getValue(5) == 1);
-        
+
     }
 
     @Test
@@ -116,7 +115,7 @@ public class PruebaBinario {
             conjuntoA.add(1);
             conjuntoA.add(3);
             conjuntoA.add(5);
-            
+
             conjuntoUniversal.add(0);
             conjuntoUniversal.add(1);
             conjuntoUniversal.add(2);
