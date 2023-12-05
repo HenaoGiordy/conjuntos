@@ -9,7 +9,7 @@ package com.palmirauv.fada.impl;
  * @author giord
  */
 public class ConjuntoArray {
-    
+
     private int[] elementos;
 
     //Conjunto definiendo solo su tamaño sin elementos
@@ -50,7 +50,7 @@ public class ConjuntoArray {
     }
 
     public void add(int x) throws Exception {
-        if(x > this.elementos.length - 1 ){
+        if (x > this.elementos.length - 1) {
             throw new Exception("Número muy grande");
         }
         this.elementos[x] = 1;
@@ -74,163 +74,87 @@ public class ConjuntoArray {
         for (int i = 0; i < this.elementos.length; i++) {
 
             if (this.elementos[i] == 1) {
-                valor += i + " ,";
+                valor += i + ", ";
             }
 
         }
 
-        return "{ " + valor.substring(0, valor.length() - 1) + " }";
+        return "{ " + valor.substring(0, valor.length() - 2) + " }";
     }
 
 //    método para unión de conjuntos
     public ConjuntoArray union(ConjuntoArray conjuntoB) {
-
         int lengthConjuntoA = this.elementos.length;
-
         int lengthConjuntoB = conjuntoB.getElementos().length;
+        int maxLength = Math.max(lengthConjuntoA, lengthConjuntoB);
 
-        ConjuntoArray resultado = new ConjuntoArray(lengthConjuntoB);
+        ConjuntoArray resultado = new ConjuntoArray(maxLength);
 
-        if (lengthConjuntoA != lengthConjuntoB) {
+        for (int i = 0; i < maxLength; i++) {
+            int elementoConjuntoA = (i < lengthConjuntoA) ? this.elementos[i] : 0;
+            int elementoConjuntoB = (i < lengthConjuntoB) ? conjuntoB.getElementos()[i] : 0;
 
-            if (lengthConjuntoA > lengthConjuntoB) {
-
-                resultado.setLength(lengthConjuntoA - 1);
-
-                for (int i = 0; i < lengthConjuntoB ; i++) {
-                    if ((this.elementos[i] == 1) || (conjuntoB.getElementos()[i] == 1)) {
-                        resultado.getElementos()[i] = 1;
-                    }
-                }
-                for (int i = lengthConjuntoB - 1; i < lengthConjuntoA ; i++) {
-                    if ((this.elementos[i] == 1)) {
-                        resultado.getElementos()[i] = 1;
-                    }
-                }
-            } if(lengthConjuntoA < lengthConjuntoB) {
-                
-                resultado.setLength(lengthConjuntoB - 1);
-
-                for (int i = 0; i < lengthConjuntoA ; i++) {
-                    if ((this.elementos[i] == 1) || (conjuntoB.getElementos()[i] == 1)) {
-                        resultado.getElementos()[i] = 1;
-                    }
-                }
-                for (int i = lengthConjuntoA - 1; i < lengthConjuntoB ; i++) {
-                    if ((conjuntoB.getElementos()[i] == 1)) {
-                        resultado.getElementos()[i] = 1;
-                    }
-                }
-
-            }
-            return resultado;
-        }
-
-        for (int i = 0; i < this.elementos.length; i++) {
-
-            if (this.elementos[i] == 1 || conjuntoB.getElementos()[i] == 1) {
-
+            if (elementoConjuntoA == 1 || elementoConjuntoB == 1) {
                 resultado.getElementos()[i] = 1;
+            } else {
+                resultado.getElementos()[i] = 0;
             }
-
         }
+
         return resultado;
     }
 
     public ConjuntoArray interseccion(ConjuntoArray conjuntoB) {
-
         int lengthConjuntoA = this.elementos.length;
-
         int lengthConjuntoB = conjuntoB.getElementos().length;
+        int maxLength = Math.min(lengthConjuntoA, lengthConjuntoB);
 
-        ConjuntoArray resultado = new ConjuntoArray(lengthConjuntoB);
+        ConjuntoArray resultado = new ConjuntoArray(maxLength);
 
-        if (lengthConjuntoA != lengthConjuntoB) {
-
-            if (lengthConjuntoA > lengthConjuntoB) {
-
-                resultado.setLength(lengthConjuntoA - 1);
-
-                for (int i = 0; i < lengthConjuntoB ; i++) {
-                    if ((this.elementos[i] == 1) && (conjuntoB.getElementos()[i] == 1)) {
-                        resultado.getElementos()[i] = 1;
-                    }
-                }
-                
-            } if(lengthConjuntoA < lengthConjuntoB) {
-                
-                resultado.setLength(lengthConjuntoB - 1);
-
-                for (int i = 0; i < lengthConjuntoA ; i++) {
-                    if ((this.elementos[i] == 1) && (conjuntoB.getElementos()[i] == 1)) {
-                        resultado.getElementos()[i] = 1;
-                    }
-                }
-                
-
-            }
-            return resultado;
-        }
-
-        for (int i = 0; i < this.elementos.length; i++) {
-
+        for (int i = 0; i < maxLength; i++) {
             if (this.elementos[i] == 1 && conjuntoB.getElementos()[i] == 1) {
-
                 resultado.getElementos()[i] = 1;
-            }
-
-        }
-        return resultado;
-    }
-
-    public ConjuntoArray complemento(ConjuntoArray universal) {
-
-        ConjuntoArray resultado = new ConjuntoArray(universal.getElementos().length);
-
-        for (int i = 0; i < this.elementos.length; i++) {
-
-            if (this.elementos[i] == 0 && universal.getElementos()[i] == 1) {
-
-                resultado.getElementos()[i] = 1;
+            } else {
+                resultado.getElementos()[i] = 0;
             }
         }
 
-        for (int i = this.elementos.length; i < universal.getElementos().length; i++) {
-
-            resultado.getElementos()[i] = 1;
-
-        }
         return resultado;
     }
 
     public ConjuntoArray diferencia(ConjuntoArray conjuntoB) {
+        int maxLength = Math.max(this.elementos.length, conjuntoB.getElementos().length);
+        ConjuntoArray resultado = new ConjuntoArray(maxLength);
 
-        ConjuntoArray resultado = new ConjuntoArray();
-        
-        int lengthconjuntoA = this.elementos.length;
-        int lengthconjuntoB = conjuntoB.getElementos().length;
-        
-        resultado.setLength(lengthconjuntoA - 1);
-  
-            if(lengthconjuntoA > lengthconjuntoB){
-                
-                
-                for(int i = 0; i < conjuntoB.getElementos().length ; i++){
-                    if ((this.elementos[i] == 1 && conjuntoB.getElementos()[i] == 0)) {
-    
-                resultado.getElementos()[i] = 1;
-            }
+        if (this.elementos.length > conjuntoB.getElementos().length) {
+            for (int i = 0; i < conjuntoB.getElementos().length; i++) {
+                if (this.elementos[i] == 1 && conjuntoB.getElementos()[i] == 0) {
+                    resultado.getElementos()[i] = 1;
                 }
-                return resultado;
             }
-        for (int i = 0; i < this.elementos.length; i++) {
+        } else {
+            for (int i = 0; i < this.elementos.length; i++) {
+                if (this.elementos[i] == 1 && conjuntoB.getElementos()[i] == 0) {
+                    resultado.getElementos()[i] = 1;
+                }
+            }
+        }
 
-            if ((this.elementos[i] == 1 && conjuntoB.getElementos()[i] == 0)) {
-    
+        return resultado;
+    }
+
+    public ConjuntoArray complemento(ConjuntoArray universal) {
+        int maxLength = Math.max(this.elementos.length, universal.getElementos().length);
+        ConjuntoArray resultado = new ConjuntoArray(maxLength);
+
+        for (int i = 0; i < maxLength; i++) {
+            if (i < this.elementos.length && this.elementos[i] == 0 && universal.getElementos()[i] == 1) {
+                resultado.getElementos()[i] = 1;
+            } else if (i >= this.elementos.length) {
                 resultado.getElementos()[i] = 1;
             }
-
         }
+
         return resultado;
     }
 

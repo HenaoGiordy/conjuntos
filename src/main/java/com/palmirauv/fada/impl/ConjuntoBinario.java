@@ -90,7 +90,7 @@ public class ConjuntoBinario {
         }
         for (int i = 0; i < elementos.length * 8; i++) {
             if (getValue(i) == 1) {
-                valor.append(i).append(" , ");
+                valor.append(i).append(", ");
             }
         }
 
