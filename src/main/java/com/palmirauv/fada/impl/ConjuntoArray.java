@@ -159,6 +159,8 @@ public class ConjuntoArray {
 
             if (elementoConjuntoA == 1 && elementoConjuntoB == 0) {
                 resultado.getElementos()[i] = 1;
+            } else {
+                resultado.getElementos()[i] = 0;
             }
         }
 
