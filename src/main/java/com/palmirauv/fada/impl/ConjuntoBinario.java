@@ -37,8 +37,8 @@ public class ConjuntoBinario {
     public void setMaxbit(int maxbit) {
         this.maxbit = maxbit;
     }
-    
-    public int getLengt(){
+
+    public int getLengt() {
         return this.elementos.length;
     }
 
@@ -201,7 +201,7 @@ public class ConjuntoBinario {
 
     // Método para el complemento de un conjunto en relación con el conjunto universal
     public ConjuntoBinario complemento(ConjuntoBinario conjuntoUniversal) {
-        
+
         int lengthConjunto = this.elementos.length;
         int lengthUniversal = conjuntoUniversal.getElementos().length;
         int maxBitA = conjuntoUniversal.getMaxbit();
@@ -212,7 +212,13 @@ public class ConjuntoBinario {
         resultado.setMaxbit(maxBitA);
 
         for (int i = 0; i < lengthResultado; i++) {
-            byte byteConjunto = (i < lengthConjunto) ? this.elementos[i] : 0;
+            int byteConjunto;
+
+            if (i < lengthConjunto) {
+                byteConjunto = this.elementos[i];
+            } else {
+                byteConjunto = 0;
+            }
             byte byteUniversal = conjuntoUniversal.getElementos()[i];
 
             resultado.getElementos()[i] = (byte) (~byteConjunto & byteUniversal);

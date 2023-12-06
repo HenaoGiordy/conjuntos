@@ -183,17 +183,27 @@ public class ConjuntoArray {
     }
 
     public ConjuntoArray complemento(ConjuntoArray universal) {
-        int maxLength = Math.max(this.elementos.length, universal.getElementos().length);
+        int lengthConjuntoA = this.elementos.length;
+        int lengthConjuntoUniversal = universal.getElementos().length;
+        int maxLength = Math.max(lengthConjuntoA, lengthConjuntoUniversal);
+
         ConjuntoArray resultado = new ConjuntoArray(maxLength);
 
         for (int i = 0; i < maxLength; i++) {
-            if (i < this.elementos.length && this.elementos[i] == 0 && universal.getElementos()[i] == 1) {
+            int elementoConjuntoA;
+
+            if (i < lengthConjuntoA) {
+                elementoConjuntoA = this.elementos[i];
+            } else {
+                elementoConjuntoA = 0;
+            }
+
+            if (universal.getElementos()[i] == 1 && elementoConjuntoA == 0) {
                 resultado.getElementos()[i] = 1;
-            } else if (i >= this.elementos.length) {
-                resultado.getElementos()[i] = 1;
+            } else {
+                resultado.getElementos()[i] = 0;
             }
         }
-
         return resultado;
     }
 
