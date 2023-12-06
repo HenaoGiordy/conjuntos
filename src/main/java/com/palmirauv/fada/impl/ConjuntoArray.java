@@ -142,8 +142,20 @@ public class ConjuntoArray {
         ConjuntoArray resultado = new ConjuntoArray(maxLength);
 
         for (int i = 0; i < maxLength; i++) {
-            int elementoConjuntoA = (i < lengthConjuntoA) ? this.elementos[i] : 0;
-            int elementoConjuntoB = (i < lengthConjuntoB) ? conjuntoB.getElementos()[i] : 0;
+            int elementoConjuntoA;
+            int elementoConjuntoB;
+            
+            if (i < lengthConjuntoA) {
+                elementoConjuntoA = this.elementos[i];
+            } else {
+                elementoConjuntoA = 0;
+            }
+
+            if (i < lengthConjuntoB) {
+                elementoConjuntoB = conjuntoB.getElementos()[i];
+            } else {
+                elementoConjuntoB = 0;
+            }
 
             if (elementoConjuntoA == 1 && elementoConjuntoB == 0) {
                 resultado.getElementos()[i] = 1;
