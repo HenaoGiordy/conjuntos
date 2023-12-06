@@ -135,20 +135,18 @@ public class ConjuntoArray {
     }
 
     public ConjuntoArray diferencia(ConjuntoArray conjuntoB) {
-        int maxLength = Math.max(this.elementos.length, conjuntoB.getElementos().length);
+        int lengthConjuntoA = this.elementos.length;
+        int lengthConjuntoB = conjuntoB.getElementos().length;
+        int maxLength = Math.max(lengthConjuntoA, lengthConjuntoB);
+
         ConjuntoArray resultado = new ConjuntoArray(maxLength);
 
-        if (this.elementos.length > conjuntoB.getElementos().length) {
-            for (int i = 0; i < conjuntoB.getElementos().length; i++) {
-                if (this.elementos[i] == 1 && conjuntoB.getElementos()[i] == 0) {
-                    resultado.getElementos()[i] = 1;
-                }
-            }
-        } else {
-            for (int i = 0; i < this.elementos.length; i++) {
-                if (this.elementos[i] == 1 && conjuntoB.getElementos()[i] == 0) {
-                    resultado.getElementos()[i] = 1;
-                }
+        for (int i = 0; i < maxLength; i++) {
+            int elementoConjuntoA = (i < lengthConjuntoA) ? this.elementos[i] : 0;
+            int elementoConjuntoB = (i < lengthConjuntoB) ? conjuntoB.getElementos()[i] : 0;
+
+            if (elementoConjuntoA == 1 && elementoConjuntoB == 0) {
+                resultado.getElementos()[i] = 1;
             }
         }
 
