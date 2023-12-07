@@ -15,131 +15,161 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PruebaBinario {
 
     @Test
-    public void pruebaAnadir() {
-        ConjuntoBinario conjuntoA = new ConjuntoBinario(8);
+    public void pruebaAnadir() throws Exception {
+        ConjuntoBinario conjuntoA = new ConjuntoBinario(100000);
 
-        assertEquals(8, ((conjuntoA.getLengt() - 1) * 8) + conjuntoA.getMaxbit());
+        for (int i = 1; i <= 100000; i++) {
+            conjuntoA.add(i);
+        }
 
+        assertEquals("{ " + getConjuntoString(1, 100000) + " }", conjuntoA.toString());
     }
-
+    
     @Test
-    public void pruebaUnion() {
-        ConjuntoBinario conjuntoA = new ConjuntoBinario(5);
-        ConjuntoBinario conjuntoB = new ConjuntoBinario(6);
+    public void pruebaUnionIgual() throws Exception {
+        ConjuntoBinario conjuntoA = new ConjuntoBinario(100000);
+        ConjuntoBinario conjuntoB = new ConjuntoBinario(100000);
 
-        try {
-            conjuntoA.add(1);
-            conjuntoA.add(3);
-            conjuntoA.add(5);
+        for (int i = 1; i <= 100000; i += 2) {
+            conjuntoA.add(i);
+        }
 
-            conjuntoB.add(2);
-            conjuntoB.add(4);
-            conjuntoB.add(5);
-
-        } catch (Exception exc) {
-            fail("Error durante la prueba: " + exc.getMessage());
+        for (int i = 1; i <= 100000; i += 2) {
+            conjuntoB.add(i);
         }
 
         ConjuntoBinario conjuntoC = conjuntoA.union(conjuntoB);
 
-        assertTrue(conjuntoC.getValue(1) == 1);
-        assertTrue(conjuntoC.getValue(2) == 1);
-        assertTrue(conjuntoC.getValue(3) == 1);
-        assertTrue(conjuntoC.getValue(4) == 1);
-        assertTrue(conjuntoC.getValue(5) == 1);
-
+        assertEquals("{ " + getConjuntoString(1, 99999, 2) + " }", conjuntoC.toString());
     }
 
     @Test
-    public void pruebaInterseccion() {
-        ConjuntoBinario conjuntoA = new ConjuntoBinario(8);
-        ConjuntoBinario conjuntoB = new ConjuntoBinario(8);
+    public void pruebaInterseccionIgual() throws Exception {
+        ConjuntoBinario conjuntoA = new ConjuntoBinario(100000);
+        ConjuntoBinario conjuntoB = new ConjuntoBinario(100000);
 
-        try {
-            conjuntoA.add(1);
-            conjuntoA.add(3);
-            conjuntoA.add(5);
+        for (int i = 1; i <= 100000; i += 2) {
+            conjuntoA.add(i);
+        }
 
-            conjuntoB.add(2);
-            conjuntoB.add(3);
-            conjuntoB.add(6);
-
-        } catch (Exception exc) {
-            fail("Error durante la prueba: " + exc.getMessage());
+        for (int i = 1; i <= 100000; i += 2) {
+            conjuntoB.add(i);
         }
 
         ConjuntoBinario conjuntoC = conjuntoA.interseccion(conjuntoB);
 
-        assertTrue(conjuntoC.getValue(1) == 0);
-        assertTrue(conjuntoC.getValue(2) == 0);
-        assertTrue(conjuntoC.getValue(3) == 1);
-        assertTrue(conjuntoC.getValue(4) == 0);
-        assertTrue(conjuntoC.getValue(5) == 0);
-        assertTrue(conjuntoC.getValue(6) == 0);
+        assertEquals("{ " + getConjuntoString(1, 99999, 2) + " }", conjuntoC.toString());
     }
 
     @Test
-    public void pruebaDiferencia() {
-        ConjuntoBinario conjuntoA = new ConjuntoBinario(8);
-        ConjuntoBinario conjuntoB = new ConjuntoBinario(8);
+    public void pruebaDiferenciaIgual() throws Exception {
+        ConjuntoBinario conjuntoA = new ConjuntoBinario(100000);
+        ConjuntoBinario conjuntoB = new ConjuntoBinario(100000);
 
-        try {
-            conjuntoA.add(1);
-            conjuntoA.add(3);
-            conjuntoA.add(5);
+        for (int i = 1; i <= 100000; i += 2) {
+            conjuntoA.add(i);
+        }
 
-            conjuntoB.add(2);
-            conjuntoB.add(3);
-            conjuntoB.add(6);
-
-        } catch (Exception exc) {
-            fail("Error durante la prueba: " + exc.getMessage());
+        for (int i = 1; i <= 100000; i += 2) {
+            conjuntoB.add(i);
         }
 
         ConjuntoBinario conjuntoC = conjuntoA.diferencia(conjuntoB);
 
-        assertTrue(conjuntoC.getValue(1) == 1);
-        assertTrue(conjuntoC.getValue(2) == 0);
-        assertTrue(conjuntoC.getValue(3) == 0);
-        assertTrue(conjuntoC.getValue(4) == 0);
-        assertTrue(conjuntoC.getValue(5) == 1);
-        assertTrue(conjuntoC.getValue(6) == 0);
+        assertEquals("{ }", conjuntoC.toString());
     }
 
     @Test
-    public void pruebaComplemento() {
-        ConjuntoBinario conjuntoA = new ConjuntoBinario(8);
-        ConjuntoBinario conjuntoUniversal = new ConjuntoBinario(8);
+    public void pruebaUnionDiferente() throws Exception {
+        ConjuntoBinario conjuntoA = new ConjuntoBinario(100000);
+        ConjuntoBinario conjuntoB = new ConjuntoBinario(100000);
 
-        try {
-            conjuntoA.add(1);
-            conjuntoA.add(3);
-            conjuntoA.add(5);
+        for (int i = 1; i <= 100000; i += 2) {
+            conjuntoA.add(i);
+        }
 
-            conjuntoUniversal.add(0);
-            conjuntoUniversal.add(1);
-            conjuntoUniversal.add(2);
-            conjuntoUniversal.add(3);
-            conjuntoUniversal.add(4);
-            conjuntoUniversal.add(5);
-            conjuntoUniversal.add(6);
-            conjuntoUniversal.add(7);
-            conjuntoUniversal.add(8);
+        for (int i = 2; i <= 100000; i += 2) {
+            conjuntoB.add(i);
+        }
 
-        } catch (Exception exc) {
-            fail("Error durante la prueba: " + exc.getMessage());
+        ConjuntoBinario conjuntoC = conjuntoA.union(conjuntoB);
+
+        assertEquals("{ " + getConjuntoString(1, 100000, 1) + " }", conjuntoC.toString());
+    }
+
+    @Test
+    public void pruebaInterseccionDiferente() throws Exception {
+        ConjuntoBinario conjuntoA = new ConjuntoBinario(100000);
+        ConjuntoBinario conjuntoB = new ConjuntoBinario(100000);
+
+        for (int i = 1; i <= 100000; i += 2) {
+            conjuntoA.add(i);
+        }
+
+        for (int i = 2; i <= 100000; i += 2) {
+            conjuntoB.add(i);
+        }
+
+        ConjuntoBinario conjuntoC = conjuntoA.interseccion(conjuntoB);
+
+        assertEquals("{ }", conjuntoC.toString());
+    }
+
+    @Test
+    public void pruebaDiferenciaDiferente() throws Exception {
+        ConjuntoBinario conjuntoA = new ConjuntoBinario(100000);
+        ConjuntoBinario conjuntoB = new ConjuntoBinario(100000);
+
+        for (int i = 1; i <= 100000; i += 2) {
+            conjuntoA.add(i);
+        }
+
+        for (int i = 2; i <= 100000; i += 2) {
+            conjuntoB.add(i);
+        }
+
+        ConjuntoBinario conjuntoC = conjuntoA.diferencia(conjuntoB);
+
+        assertEquals("{ " + getConjuntoString(1, 99999, 2) + " }", conjuntoC.toString());
+    }
+
+    @Test
+    public void pruebaComplemento() throws Exception {
+        ConjuntoBinario conjuntoA = new ConjuntoBinario(100000);
+        ConjuntoBinario conjuntoUniversal = new ConjuntoBinario(100000);
+
+        for (int i = 1; i <= 100000; i += 2) {
+            conjuntoA.add(i);
+        }
+
+        for (int i = 1; i <= 100000; i++) {
+            conjuntoUniversal.add(i);
         }
 
         ConjuntoBinario conjuntoC = conjuntoA.complemento(conjuntoUniversal);
 
-        assertTrue(conjuntoC.getValue(0) == 1);
-        assertTrue(conjuntoC.getValue(1) == 0);
-        assertTrue(conjuntoC.getValue(2) == 1);
-        assertTrue(conjuntoC.getValue(3) == 0);
-        assertTrue(conjuntoC.getValue(4) == 1);
-        assertTrue(conjuntoC.getValue(5) == 0);
-        assertTrue(conjuntoC.getValue(6) == 1);
-        assertTrue(conjuntoC.getValue(7) == 1);
-        assertTrue(conjuntoC.getValue(8) == 1);
+        assertEquals("{ " + getConjuntoString(2, 100000, 2) + " }", conjuntoC.toString());
+    }
+
+    private String getConjuntoString(int inicio, int fin) {
+        StringBuilder conjuntoString = new StringBuilder();
+        for (int i = inicio; i <= fin; i++) {
+            conjuntoString.append(i);
+            if (i < fin) {
+                conjuntoString.append(", ");
+            }
+        }
+        return conjuntoString.toString();
+    }
+
+    private String getConjuntoString(int inicio, int fin, int paso) {
+        StringBuilder conjuntoString = new StringBuilder();
+        for (int i = inicio; i <= fin; i += paso) {
+            conjuntoString.append(i);
+            if (i < fin) {
+                conjuntoString.append(", ");
+            }
+        }
+        return conjuntoString.toString();
     }
 }

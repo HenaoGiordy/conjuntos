@@ -18,65 +18,119 @@ public class PruebaListaE {
     public void pruebaAnadir() {
         ConjuntoListaE conjuntoA = new ConjuntoListaE();
 
-        conjuntoA.add(1);
-        conjuntoA.add(2);
-        conjuntoA.add(3);
+        for (int i = 1; i <= 1000000; i++) {
+            conjuntoA.add(i);
+        }
 
-        assertTrue(conjuntoA.toString().equals("{ 1, 2, 3 }"));
+        assertEquals("{ " + getConjuntoString(1, 100000) + " }", conjuntoA.toString());
     }
 
     @Test
-    public void pruebaUnion() {
+    public void pruebaUnionDiferente() {
         ConjuntoListaE conjuntoA = new ConjuntoListaE();
         ConjuntoListaE conjuntoB = new ConjuntoListaE();
 
-        conjuntoA.add(1);
-        conjuntoA.add(3);
-        conjuntoA.add(5);
+        for (int i = 1; i <= 100000; i += 2) {
+            conjuntoA.add(i);
+        }
 
-        conjuntoB.add(2);
-        conjuntoB.add(4);
-        conjuntoB.add(6);
+        for (int i = 2; i <= 100000; i += 2) {
+            conjuntoB.add(i);
+        }
 
         ConjuntoListaE conjuntoC = conjuntoA.union(conjuntoB);
 
-        assertTrue(conjuntoC.toString().equals("{ 1, 3, 5, 2, 4, 6 }"));
+        assertEquals("{ " + getConjuntoString(1, 100000, 2) + getConjuntoString(2, 100000, 2) + " }", conjuntoC.toString());
     }
-
-    @Test
-    public void pruebaInterseccion() {
+    
+        @Test
+    public void pruebaUnionIgual() {
         ConjuntoListaE conjuntoA = new ConjuntoListaE();
         ConjuntoListaE conjuntoB = new ConjuntoListaE();
 
-        conjuntoA.add(1);
-        conjuntoA.add(3);
-        conjuntoA.add(5);
+        for (int i = 1; i <= 100000; i += 2) {
+            conjuntoA.add(i);
+        }
 
-        conjuntoB.add(2);
-        conjuntoB.add(3);
-        conjuntoB.add(6);
+        for (int i = 1; i <= 100000; i += 2) {
+            conjuntoB.add(i);
+        }
+
+        ConjuntoListaE conjuntoC = conjuntoA.union(conjuntoB);
+
+        assertEquals("{ " + getConjuntoString(1, 99999, 2) + " }", conjuntoC.toString());
+    }
+
+    @Test
+    public void pruebaInterseccionDiferente() {
+        ConjuntoListaE conjuntoA = new ConjuntoListaE();
+        ConjuntoListaE conjuntoB = new ConjuntoListaE();
+
+        for (int i = 1; i <= 100000; i += 2) {
+            conjuntoA.add(i);
+        }
+
+        for (int i = 2; i <= 100000; i += 2) {
+            conjuntoB.add(i);
+        }
 
         ConjuntoListaE conjuntoC = conjuntoA.interseccion(conjuntoB);
 
-        assertTrue(conjuntoC.toString().equals("{ 3 }"));
+        assertEquals("{ }", conjuntoC.toString());
     }
-
-    @Test
-    public void pruebaDiferencia() {
+    
+        @Test
+    public void pruebaInterseccionIgual() {
         ConjuntoListaE conjuntoA = new ConjuntoListaE();
         ConjuntoListaE conjuntoB = new ConjuntoListaE();
 
-        conjuntoA.add(1);
-        conjuntoA.add(3);
-        conjuntoA.add(5);
+        for (int i = 1; i <= 100000; i += 2) {
+            conjuntoA.add(i);
+        }
 
-        conjuntoB.add(2);
-        conjuntoB.add(3);
-        conjuntoB.add(6);
+        for (int i = 1; i <= 100000; i += 2) {
+            conjuntoB.add(i);
+        }
+
+        ConjuntoListaE conjuntoC = conjuntoA.interseccion(conjuntoB);
+
+        assertEquals("{ " + getConjuntoString(1, 99999, 2) + " }", conjuntoC.toString());
+    }
+
+    @Test
+    public void pruebaDiferenciaDiferente() {
+        ConjuntoListaE conjuntoA = new ConjuntoListaE();
+        ConjuntoListaE conjuntoB = new ConjuntoListaE();
+
+        for (int i = 1; i <= 100000; i += 2) {
+            conjuntoA.add(i);
+        }
+
+        for (int i = 2; i <= 100000; i += 2) {
+            conjuntoB.add(i);
+        }
 
         ConjuntoListaE conjuntoC = conjuntoA.diferencia(conjuntoB);
 
-        assertTrue(conjuntoC.toString().equals("{ 1, 5 }"));
+        assertEquals("{ " + getConjuntoString(1, 99999, 2) + " }", conjuntoC.toString());
+    }
+    
+        @Test
+    public void pruebaDiferenciaIgual() {
+        ConjuntoListaE conjuntoA = new ConjuntoListaE();
+        ConjuntoListaE conjuntoB = new ConjuntoListaE();
+
+        for (int i = 1; i <= 100000; i += 2) {
+            conjuntoA.add(i);
+        }
+
+        for (int i = 1; i <= 100000; i += 2) {
+            conjuntoB.add(i);
+        }
+
+        ConjuntoListaE conjuntoC = conjuntoA.diferencia(conjuntoB);
+
+        assertEquals("{ }", conjuntoC.toString());
     }
 
     @Test
@@ -84,16 +138,40 @@ public class PruebaListaE {
         ConjuntoListaE conjuntoA = new ConjuntoListaE();
         ConjuntoListaE conjuntoUniversal = new ConjuntoListaE();
 
-        conjuntoA.add(1);
-        conjuntoA.add(3);
-        conjuntoA.add(5);
+        for (int i = 1; i <= 100000; i += 2) {
+            conjuntoA.add(i);
+        }
 
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i <= 100000; i++) {
             conjuntoUniversal.add(i);
         }
 
         ConjuntoListaE conjuntoC = conjuntoA.complemento(conjuntoUniversal);
 
-        assertTrue(conjuntoC.toString().equals("{ 2, 4, 6, 7, 8, 9, 10 }"));
+        assertEquals("{ " + getConjuntoString(2, 100000, 2) + " }", conjuntoC.toString());
+    }
+
+    // Método para obtener la representación de un conjunto como una cadena
+    private String getConjuntoString(int inicio, int fin) {
+        StringBuilder conjuntoString = new StringBuilder();
+        for (int i = inicio; i <= fin; i++) {
+            conjuntoString.append(i);
+            if (i < fin) {
+                conjuntoString.append(", ");
+            }
+        }
+        return conjuntoString.toString();
+    }
+
+    // Método para obtener la representación de un conjunto como una cadena con un paso
+    private String getConjuntoString(int inicio, int fin, int paso) {
+        StringBuilder conjuntoString = new StringBuilder();
+        for (int i = inicio; i <= fin; i += paso) {
+            conjuntoString.append(i);
+            if (i < fin) {
+                conjuntoString.append(", ");
+            }
+        }
+        return conjuntoString.toString();
     }
 }
