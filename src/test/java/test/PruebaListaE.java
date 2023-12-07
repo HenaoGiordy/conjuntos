@@ -18,11 +18,19 @@ public class PruebaListaE {
     public void pruebaAnadir() {
         ConjuntoListaE conjuntoA = new ConjuntoListaE();
 
-        for (int i = 1; i <= 1000000; i++) {
-            conjuntoA.add(i);
-        }
+        for (int j = 10000; j <= 100000; j += 10000) {
+            long inicio = System.currentTimeMillis();
 
-        assertEquals("{ " + getConjuntoString(1, 100000) + " }", conjuntoA.toString());
+            for (int i = 1; i <= j; i++) {
+                conjuntoA.add(i);
+            }
+
+            long fin = System.currentTimeMillis();
+            long tiempoEjecucion = fin - inicio;
+            System.out.println("Tiempo de ejecucion para j=" + j + ": " + tiempoEjecucion + " milisegundos");
+
+            assertEquals("{ " + getConjuntoString(1, j) + " }", conjuntoA.toString());
+        }
     }
 
     @Test
@@ -30,35 +38,51 @@ public class PruebaListaE {
         ConjuntoListaE conjuntoA = new ConjuntoListaE();
         ConjuntoListaE conjuntoB = new ConjuntoListaE();
 
-        for (int i = 1; i <= 100000; i += 2) {
-            conjuntoA.add(i);
+        for (int j = 10000; j <= 100000; j += 10000) {
+            long inicio = System.currentTimeMillis();
+
+            for (int i = 1; i <= j; i += 2) {
+                conjuntoA.add(i);
+            }
+
+            for (int i = 2; i <= j; i += 2) {
+                conjuntoB.add(i);
+            }
+
+            ConjuntoListaE conjuntoC = conjuntoA.union(conjuntoB);
+
+            long fin = System.currentTimeMillis();
+            long tiempoEjecucion = fin - inicio;
+            System.out.println("Tiempo de ejecucion para j=" + j + ": " + tiempoEjecucion + " milisegundos");
+
+            assertEquals("{ " + getConjuntoString(1, j, 2) + getConjuntoString(2, j, 2) + " }", conjuntoC.toString());
         }
-
-        for (int i = 2; i <= 100000; i += 2) {
-            conjuntoB.add(i);
-        }
-
-        ConjuntoListaE conjuntoC = conjuntoA.union(conjuntoB);
-
-        assertEquals("{ " + getConjuntoString(1, 100000, 2) + getConjuntoString(2, 100000, 2) + " }", conjuntoC.toString());
     }
-    
-        @Test
+
+    @Test
     public void pruebaUnionIgual() {
         ConjuntoListaE conjuntoA = new ConjuntoListaE();
         ConjuntoListaE conjuntoB = new ConjuntoListaE();
 
-        for (int i = 1; i <= 100000; i += 2) {
-            conjuntoA.add(i);
+        for (int j = 10000; j <= 100000; j += 10000) {
+            long inicio = System.currentTimeMillis();
+
+            for (int i = 1; i <= j; i += 2) {
+                conjuntoA.add(i);
+            }
+
+            for (int i = 1; i <= j; i += 2) {
+                conjuntoB.add(i);
+            }
+
+            ConjuntoListaE conjuntoC = conjuntoA.union(conjuntoB);
+
+            long fin = System.currentTimeMillis();
+            long tiempoEjecucion = fin - inicio;
+            System.out.println("Tiempo de ejecucion para j=" + j + ": " + tiempoEjecucion + " milisegundos");
+
+            assertEquals("{ " + getConjuntoString(1, j - 1, 2) + " }", conjuntoC.toString());
         }
-
-        for (int i = 1; i <= 100000; i += 2) {
-            conjuntoB.add(i);
-        }
-
-        ConjuntoListaE conjuntoC = conjuntoA.union(conjuntoB);
-
-        assertEquals("{ " + getConjuntoString(1, 99999, 2) + " }", conjuntoC.toString());
     }
 
     @Test
@@ -66,35 +90,51 @@ public class PruebaListaE {
         ConjuntoListaE conjuntoA = new ConjuntoListaE();
         ConjuntoListaE conjuntoB = new ConjuntoListaE();
 
-        for (int i = 1; i <= 100000; i += 2) {
-            conjuntoA.add(i);
+        for (int j = 10000; j <= 100000; j += 10000) {
+            long inicio = System.currentTimeMillis();
+
+            for (int i = 1; i <= j; i += 2) {
+                conjuntoA.add(i);
+            }
+
+            for (int i = 2; i <= j; i += 2) {
+                conjuntoB.add(i);
+            }
+
+            ConjuntoListaE conjuntoC = conjuntoA.interseccion(conjuntoB);
+
+            long fin = System.currentTimeMillis();
+            long tiempoEjecucion = fin - inicio;
+            System.out.println("Tiempo de ejecucion para j=" + j + ": " + tiempoEjecucion + " milisegundos");
+
+            assertEquals("{ }", conjuntoC.toString());
         }
-
-        for (int i = 2; i <= 100000; i += 2) {
-            conjuntoB.add(i);
-        }
-
-        ConjuntoListaE conjuntoC = conjuntoA.interseccion(conjuntoB);
-
-        assertEquals("{ }", conjuntoC.toString());
     }
-    
-        @Test
+
+    @Test
     public void pruebaInterseccionIgual() {
         ConjuntoListaE conjuntoA = new ConjuntoListaE();
         ConjuntoListaE conjuntoB = new ConjuntoListaE();
 
-        for (int i = 1; i <= 100000; i += 2) {
-            conjuntoA.add(i);
+        for (int j = 10000; j <= 100000; j += 10000) {
+            long inicio = System.currentTimeMillis();
+
+            for (int i = 1; i <= j; i += 2) {
+                conjuntoA.add(i);
+            }
+
+            for (int i = 1; i <= j; i += 2) {
+                conjuntoB.add(i);
+            }
+
+            ConjuntoListaE conjuntoC = conjuntoA.interseccion(conjuntoB);
+
+            long fin = System.currentTimeMillis();
+            long tiempoEjecucion = fin - inicio;
+            System.out.println("Tiempo de ejecucion para j=" + j + ": " + tiempoEjecucion + " milisegundos");
+
+            assertEquals("{ " + getConjuntoString(1, j - 1, 2) + " }", conjuntoC.toString());
         }
-
-        for (int i = 1; i <= 100000; i += 2) {
-            conjuntoB.add(i);
-        }
-
-        ConjuntoListaE conjuntoC = conjuntoA.interseccion(conjuntoB);
-
-        assertEquals("{ " + getConjuntoString(1, 99999, 2) + " }", conjuntoC.toString());
     }
 
     @Test
@@ -102,35 +142,51 @@ public class PruebaListaE {
         ConjuntoListaE conjuntoA = new ConjuntoListaE();
         ConjuntoListaE conjuntoB = new ConjuntoListaE();
 
-        for (int i = 1; i <= 100000; i += 2) {
-            conjuntoA.add(i);
+        for (int j = 10000; j <= 100000; j += 10000) {
+            long inicio = System.currentTimeMillis();
+
+            for (int i = 1; i <= j; i += 2) {
+                conjuntoA.add(i);
+            }
+
+            for (int i = 2; i <= j; i += 2) {
+                conjuntoB.add(i);
+            }
+
+            ConjuntoListaE conjuntoC = conjuntoA.diferencia(conjuntoB);
+
+            long fin = System.currentTimeMillis();
+            long tiempoEjecucion = fin - inicio;
+            System.out.println("Tiempo de ejecucion para j=" + j + ": " + tiempoEjecucion + " milisegundos");
+
+            assertEquals("{ " + getConjuntoString(1, j-1, 2) + " }", conjuntoC.toString());
         }
-
-        for (int i = 2; i <= 100000; i += 2) {
-            conjuntoB.add(i);
-        }
-
-        ConjuntoListaE conjuntoC = conjuntoA.diferencia(conjuntoB);
-
-        assertEquals("{ " + getConjuntoString(1, 99999, 2) + " }", conjuntoC.toString());
     }
-    
-        @Test
+
+    @Test
     public void pruebaDiferenciaIgual() {
         ConjuntoListaE conjuntoA = new ConjuntoListaE();
         ConjuntoListaE conjuntoB = new ConjuntoListaE();
 
-        for (int i = 1; i <= 100000; i += 2) {
-            conjuntoA.add(i);
+        for (int j = 10000; j <= 100000; j += 10000) {
+            long inicio = System.currentTimeMillis();
+
+            for (int i = 1; i <= j; i += 2) {
+                conjuntoA.add(i);
+            }
+
+            for (int i = 1; i <= j; i += 2) {
+                conjuntoB.add(i);
+            }
+
+            ConjuntoListaE conjuntoC = conjuntoA.diferencia(conjuntoB);
+
+            long fin = System.currentTimeMillis();
+            long tiempoEjecucion = fin - inicio;
+            System.out.println("Tiempo de ejecucion para j=" + j + ": " + tiempoEjecucion + " milisegundos");
+
+            assertEquals("{ }", conjuntoC.toString());
         }
-
-        for (int i = 1; i <= 100000; i += 2) {
-            conjuntoB.add(i);
-        }
-
-        ConjuntoListaE conjuntoC = conjuntoA.diferencia(conjuntoB);
-
-        assertEquals("{ }", conjuntoC.toString());
     }
 
     @Test
@@ -138,20 +194,28 @@ public class PruebaListaE {
         ConjuntoListaE conjuntoA = new ConjuntoListaE();
         ConjuntoListaE conjuntoUniversal = new ConjuntoListaE();
 
-        for (int i = 1; i <= 100000; i += 2) {
-            conjuntoA.add(i);
+        for (int j = 10000; j <= 100000; j += 10000) {
+            long inicio = System.currentTimeMillis();
+
+            for (int i = 1; i <= j; i += 2) {
+                conjuntoA.add(i);
+            }
+
+            for (int i = 1; i <= j; i++) {
+                conjuntoUniversal.add(i);
+            }
+
+            ConjuntoListaE conjuntoC = conjuntoA.complemento(conjuntoUniversal);
+
+            long fin = System.currentTimeMillis();
+            long tiempoEjecucion = fin - inicio;
+            System.out.println("Tiempo de ejecucion para j=" + j + ": " + tiempoEjecucion + " milisegundos");
+
+            assertEquals("{ " + getConjuntoString(2, j, 2) + " }", conjuntoC.toString());
         }
-
-        for (int i = 1; i <= 100000; i++) {
-            conjuntoUniversal.add(i);
-        }
-
-        ConjuntoListaE conjuntoC = conjuntoA.complemento(conjuntoUniversal);
-
-        assertEquals("{ " + getConjuntoString(2, 100000, 2) + " }", conjuntoC.toString());
     }
 
-    // Método para obtener la representación de un conjunto como una cadena
+// Método para obtener la representación de un conjunto como una cadena
     private String getConjuntoString(int inicio, int fin) {
         StringBuilder conjuntoString = new StringBuilder();
         for (int i = inicio; i <= fin; i++) {
